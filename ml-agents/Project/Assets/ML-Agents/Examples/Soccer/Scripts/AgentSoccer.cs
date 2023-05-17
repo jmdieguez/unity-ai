@@ -5,7 +5,8 @@ using Unity.MLAgents.Policies;
 using Unity.MLAgents.Extensions;
 using Unity.MLAgents.Sensors;
 using Unity.MLAgents.Sensors.Reflection;
-
+using System.Collections.Generic;
+using System.Linq;
 public enum Team
 {
     Blue = 0,
@@ -14,6 +15,26 @@ public enum Team
 
 public class AgentSoccer : Agent
 {
+    float m_KickPower;
+    // The coefficient for the reward for colliding with a ball. Set using curriculum.
+    float m_BallTouch;
+
+    [HideInInspector]
+    public Team team;
+
+    public enum Position
+    {
+        Striker,
+        Goalie,
+        Generic,
+        Defender
+    }
+    public GameObject field;
+
+    public Position position;
+    // Define the visual sensor component and its parameters
+    public RayPerceptionSensorComponent3D rayPerceptionSensor;
+
     // Note that that the detectable tags are different for the blue and purple teams. The order is
     // * ball
     // * own goal
@@ -22,38 +43,28 @@ public class AgentSoccer : Agent
     // * own teammate
     // * opposing player
 
-    // Add a new field to hold the reward for staying in the field
-    public float fieldReward = 0.01f;
+    // Define the team tags
+    // Team 1 tags
+    public List<string> blueTags = new List<string> { "ball", "blueGoal", "purpleGoal", "wall", "blueAgent", "purpleAgent" };
+    // Team 2 tags
+    public List<string> purpleTags = new List<string> { "ball", "purpleGoal", "blueGoal", "wall", "purpleAgent", "blueAgent" };
 
-    // Add a new field to hold the penalty for going upfield
-    public float fieldPenalty = -0.01f;
-    
-    public enum Position
-    {
-        Striker,
-        Goalie,
-        Generic,
-        Defender
-    }
-
-    [HideInInspector]
-    public Team team;
-    float m_KickPower;
-    // The coefficient for the reward for colliding with a ball. Set using curriculum.
-    float m_BallTouch;
-    
-    [Observable]
-    public Position position;
+    private Dictionary<string, int> tagToIntMap = new Dictionary<string, int>() {
+        { "ball", 0 },
+        { "blueGoal", 1 },
+        { "purpleGoal", 2 },
+        { "wall", 3 },
+        { "blueAgent", 4 },
+        { "purpleAgent", 5 }
+    };
 
     const float k_Power = 2000f;
     float m_Existential;
     float m_LateralSpeed;
     float m_ForwardSpeed;
 
-
     [HideInInspector]
     public Rigidbody agentRb;
-    public GameObject field;
     SoccerSettings m_SoccerSettings;
     BehaviorParameters m_BehaviorParameters;
     public Vector3 initialPos;
@@ -104,6 +115,9 @@ public class AgentSoccer : Agent
         m_SoccerSettings = FindObjectOfType<SoccerSettings>();
         agentRb = GetComponent<Rigidbody>();
         agentRb.maxAngularVelocity = 500;
+
+        // Get the RayPerceptionSensor component
+        rayPerceptionSensor = GetComponent<RayPerceptionSensorComponent3D>();
 
         m_ResetParams = Academy.Instance.EnvironmentParameters;
     }
@@ -156,15 +170,15 @@ public class AgentSoccer : Agent
     }
 
     void OnTriggerEnter(Collider other)
-    {   
-         if (other.gameObject == field.gameObject)
-         {
-            AddReward(fieldReward);
-         }
-         else
-         {
-            AddReward(fieldPenalty);
-         }
+    {  
+        if (other.gameObject == field.gameObject)
+        {
+           AddReward(m_Existential);
+        }
+        else
+        {
+           AddReward(-m_Existential);
+        }
     }
 
     public override void OnActionReceived(ActionBuffers actionBuffers)
@@ -221,6 +235,66 @@ public class AgentSoccer : Agent
         {
             discreteActionsOut[1] = 2;
         }
+    }
+
+    public override void CollectObservations(VectorSensor sensor)
+    {
+        sensor.Reset();
+
+        rayPerceptionSensor.DetectableTags = (team == Team.Blue) ? blueTags : purpleTags;
+
+        int numRays = rayPerceptionSensor.RaysPerDirection * 2 + 1; // Assuming equal rays on both sides
+        float startAngle = -rayPerceptionSensor.MaxRayDegrees;
+        float angleIncrement = (rayPerceptionSensor.MaxRayDegrees * 2) / (numRays - 1);
+
+        for (int i = 0; i < numRays; i++)
+        {
+            float rayAngle = startAngle + (i * angleIncrement);
+            Vector3 rayDirection = Quaternion.Euler(0f, rayAngle, 0f) * transform.forward;
+            float rayDistance = rayPerceptionSensor.RayLength;
+
+            RaycastHit hit;
+            bool hasHit = Physics.Raycast(rayPerceptionSensor.transform.position, rayDirection, out hit, rayDistance);
+
+            if (hasHit)
+            {
+                float hitDistance = hit.distance;
+                string hitTag = hit.collider.tag;
+                Vector3 hitNormal = hit.normal;
+
+
+                sensor.AddObservation(hitDistance);
+                int tagIndex;
+                if (tagToIntMap.TryGetValue(hitTag, out tagIndex))
+                {
+                    // Key exists in the dictionary, add the observation
+                    sensor.AddObservation(tagIndex);
+                }
+                else
+                {
+                    // Key does not exist, add a placeholder value
+                    sensor.AddObservation(-1);
+                }
+                
+                sensor.AddObservation(hitNormal.x);
+                sensor.AddObservation(hitNormal.y);
+                sensor.AddObservation(hitNormal.z);
+            }
+            else
+            {
+                sensor.AddObservation(rayDistance); // No hit distance
+                sensor.AddObservation(-1); // No tag
+                sensor.AddObservation(0f); // No hit normal x
+                sensor.AddObservation(0f); // No hit normal y
+                sensor.AddObservation(0f); // No hit normal z
+            }
+        }
+
+        // Collect visual observations using the RayPerceptionSensor
+        int positionIndex = (int) position;
+        sensor.AddOneHotObservation(positionIndex, 4);
+        // Add the position of the field to the observations
+        sensor.AddObservation(field.transform.position);
     }
 
     /// <summary>
