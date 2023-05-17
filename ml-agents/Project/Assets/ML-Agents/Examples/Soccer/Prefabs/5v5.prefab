@@ -852,7 +852,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxEnvironmentSteps: 25000
-  ball: {fileID: 0}
+  ball: {fileID: 4544305304310684049}
   ballRb: {fileID: 0}
   AgentsList:
   - Agent: {fileID: 3499490728192119783}
