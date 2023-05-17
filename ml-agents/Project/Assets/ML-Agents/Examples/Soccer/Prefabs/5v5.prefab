@@ -16,8 +16,7 @@ GameObject:
   - component: {fileID: 3516439639371630410}
   - component: {fileID: 2524502901424627299}
   - component: {fileID: 2772319920326357717}
-  - component: {fileID: 1411819939522836054}
-  - component: {fileID: 5950768765664377908}
+  - component: {fileID: 4289324486470203407}
   m_Layer: 0
   m_Name: BlueStriker (1)
   m_TagString: blueAgent
@@ -198,7 +197,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debugCommandLineOverride: 
---- !u!114 &1411819939522836054
+--- !u!114 &4289324486470203407
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -212,22 +211,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SensorName: VectorSensor
   m_ObservationSize: 6
-  m_ObservationType: 0
-  m_ObservationStacks: 1
---- !u!114 &5950768765664377908
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1258513672064901}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 38b7cc1f5819445aa85e9a9b054552dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SensorName: VectorSensor
-  m_ObservationSize: 0
   m_ObservationType: 0
   m_ObservationStacks: 1
 --- !u!1 &273537805807226475
@@ -624,7 +607,7 @@ GameObject:
   - component: {fileID: 1345922056067244918}
   - component: {fileID: 3091688540257843656}
   - component: {fileID: 3531761677819500557}
-  - component: {fileID: 4045387844894936250}
+  - component: {fileID: 1945927681245512083}
   m_Layer: 0
   m_Name: BlueGoalie
   m_TagString: blueAgent
@@ -805,7 +788,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debugCommandLineOverride: 
---- !u!114 &4045387844894936250
+--- !u!114 &1945927681245512083
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -818,7 +801,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SensorName: VectorSensor
-  m_ObservationSize: 0
+  m_ObservationSize: 6
   m_ObservationType: 0
   m_ObservationStacks: 1
 --- !u!1 &1059103001106098338
@@ -830,6 +813,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8697129947850414053}
+  - component: {fileID: 6888106689027750187}
   m_Layer: 0
   m_Name: 5v5
   m_TagString: Untagged
@@ -855,6 +839,62 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6888106689027750187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1059103001106098338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e397bc3ae78c466a8d44400f5b68e38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxEnvironmentSteps: 25000
+  ball: {fileID: 0}
+  ballRb: {fileID: 0}
+  AgentsList:
+  - Agent: {fileID: 3499490728192119783}
+    StartingPos: {x: 0, y: 0, z: 0}
+    StartingRot: {x: 0, y: 0, z: 0, w: 0}
+    Rb: {fileID: 0}
+  - Agent: {fileID: 2327391373454353253}
+    StartingPos: {x: 0, y: 0, z: 0}
+    StartingRot: {x: 0, y: 0, z: 0, w: 0}
+    Rb: {fileID: 0}
+  - Agent: {fileID: 8630494519833995167}
+    StartingPos: {x: 0, y: 0, z: 0}
+    StartingRot: {x: 0, y: 0, z: 0, w: 0}
+    Rb: {fileID: 0}
+  - Agent: {fileID: 7258582659225075036}
+    StartingPos: {x: 0, y: 0, z: 0}
+    StartingRot: {x: 0, y: 0, z: 0, w: 0}
+    Rb: {fileID: 0}
+  - Agent: {fileID: 7156199444319392116}
+    StartingPos: {x: 0, y: 0, z: 0}
+    StartingRot: {x: 0, y: 0, z: 0, w: 0}
+    Rb: {fileID: 0}
+  - Agent: {fileID: 9151933116248715109}
+    StartingPos: {x: 0, y: 0, z: 0}
+    StartingRot: {x: 0, y: 0, z: 0, w: 0}
+    Rb: {fileID: 0}
+  - Agent: {fileID: 9088206500200776901}
+    StartingPos: {x: 0, y: 0, z: 0}
+    StartingRot: {x: 0, y: 0, z: 0, w: 0}
+    Rb: {fileID: 0}
+  - Agent: {fileID: 309018230563122475}
+    StartingPos: {x: 0, y: 0, z: 0}
+    StartingRot: {x: 0, y: 0, z: 0, w: 0}
+    Rb: {fileID: 0}
+  - Agent: {fileID: 7455261050260536234}
+    StartingPos: {x: 0, y: 0, z: 0}
+    StartingRot: {x: 0, y: 0, z: 0, w: 0}
+    Rb: {fileID: 0}
+  - Agent: {fileID: 3198297447504766751}
+    StartingPos: {x: 0, y: 0, z: 0}
+    StartingRot: {x: 0, y: 0, z: 0, w: 0}
+    Rb: {fileID: 0}
 --- !u!1 &1127202796537091022
 GameObject:
   m_ObjectHideFlags: 0
@@ -3712,7 +3752,7 @@ GameObject:
   - component: {fileID: 2708384523667646247}
   - component: {fileID: 3177412967389494191}
   - component: {fileID: 5517447387873912448}
-  - component: {fileID: 5392013845825550320}
+  - component: {fileID: 5111819783868187011}
   m_Layer: 0
   m_Name: BlueDefender
   m_TagString: blueAgent
@@ -3893,7 +3933,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debugCommandLineOverride: 
---- !u!114 &5392013845825550320
+--- !u!114 &5111819783868187011
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3906,7 +3946,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SensorName: VectorSensor
-  m_ObservationSize: 0
+  m_ObservationSize: 6
   m_ObservationType: 0
   m_ObservationStacks: 1
 --- !u!1 &3402010396834143143
@@ -4083,7 +4123,7 @@ GameObject:
   - component: {fileID: 3719719039314188190}
   - component: {fileID: 1971221298333553848}
   - component: {fileID: 7478597619617481513}
-  - component: {fileID: 2666791928985090029}
+  - component: {fileID: 1824487791911559791}
   m_Layer: 0
   m_Name: PurpleStriker (2)
   m_TagString: purpleAgent
@@ -4264,7 +4304,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debugCommandLineOverride: 
---- !u!114 &2666791928985090029
+--- !u!114 &1824487791911559791
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4277,7 +4317,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SensorName: VectorSensor
-  m_ObservationSize: 0
+  m_ObservationSize: 6
   m_ObservationType: 0
   m_ObservationStacks: 1
 --- !u!1 &3557666764967008024
@@ -4991,7 +5031,7 @@ GameObject:
   - component: {fileID: 8906625248921329192}
   - component: {fileID: 1405901998253136185}
   - component: {fileID: 312082511951526296}
-  - component: {fileID: 2656912949075083251}
+  - component: {fileID: 1299189349941155611}
   m_Layer: 0
   m_Name: PurpleGoalie
   m_TagString: purpleAgent
@@ -5172,7 +5212,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debugCommandLineOverride: 
---- !u!114 &2656912949075083251
+--- !u!114 &1299189349941155611
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5185,7 +5225,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SensorName: VectorSensor
-  m_ObservationSize: 0
+  m_ObservationSize: 6
   m_ObservationType: 0
   m_ObservationStacks: 1
 --- !u!1 &4147026637161324575
@@ -5204,7 +5244,7 @@ GameObject:
   - component: {fileID: 4716385187218125426}
   - component: {fileID: 643404068231345867}
   - component: {fileID: 824143775395417624}
-  - component: {fileID: 6225168661250590659}
+  - component: {fileID: 523661841086433113}
   m_Layer: 0
   m_Name: PurpleStriker (1)
   m_TagString: purpleAgent
@@ -5385,7 +5425,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debugCommandLineOverride: 
---- !u!114 &6225168661250590659
+--- !u!114 &523661841086433113
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5398,7 +5438,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SensorName: VectorSensor
-  m_ObservationSize: 0
+  m_ObservationSize: 6
   m_ObservationType: 0
   m_ObservationStacks: 1
 --- !u!1 &4344616919507067317
@@ -6324,7 +6364,7 @@ GameObject:
   - component: {fileID: 8784551958659473190}
   - component: {fileID: 7217959630850035407}
   - component: {fileID: 666607560349667114}
-  - component: {fileID: 7597193030317790811}
+  - component: {fileID: 1459313353898733377}
   m_Layer: 0
   m_Name: BlueDefender (1)
   m_TagString: blueAgent
@@ -6505,7 +6545,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debugCommandLineOverride: 
---- !u!114 &7597193030317790811
+--- !u!114 &1459313353898733377
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6518,7 +6558,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SensorName: VectorSensor
-  m_ObservationSize: 0
+  m_ObservationSize: 6
   m_ObservationType: 0
   m_ObservationStacks: 1
 --- !u!1 &5199694729580976614
@@ -7306,7 +7346,7 @@ GameObject:
   - component: {fileID: 9131529115092036999}
   - component: {fileID: 8433757652981796034}
   - component: {fileID: 8112736169109024656}
-  - component: {fileID: 3229541049943731069}
+  - component: {fileID: 1589220498668014136}
   m_Layer: 0
   m_Name: BlueStriker (2)
   m_TagString: blueAgent
@@ -7487,7 +7527,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debugCommandLineOverride: 
---- !u!114 &3229541049943731069
+--- !u!114 &1589220498668014136
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -7500,7 +7540,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SensorName: VectorSensor
-  m_ObservationSize: 0
+  m_ObservationSize: 6
   m_ObservationType: 0
   m_ObservationStacks: 1
 --- !u!1 &6523272988974257144
@@ -8006,7 +8046,7 @@ GameObject:
   - component: {fileID: 8329090538784531890}
   - component: {fileID: 8647311351369514245}
   - component: {fileID: 1529864634989306087}
-  - component: {fileID: 6436938886593706730}
+  - component: {fileID: 4912055790598285670}
   m_Layer: 0
   m_Name: PurpleDefender (1)
   m_TagString: purpleAgent
@@ -8187,7 +8227,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debugCommandLineOverride: 
---- !u!114 &6436938886593706730
+--- !u!114 &4912055790598285670
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8200,7 +8240,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SensorName: VectorSensor
-  m_ObservationSize: 0
+  m_ObservationSize: 6
   m_ObservationType: 0
   m_ObservationStacks: 1
 --- !u!1 &7180960799969354948
@@ -8283,7 +8323,7 @@ GameObject:
   - component: {fileID: 2161490923768069416}
   - component: {fileID: 589968321255123939}
   - component: {fileID: 2124290809512527302}
-  - component: {fileID: 805942984620441706}
+  - component: {fileID: 8431341109622145283}
   m_Layer: 0
   m_Name: PurpleDefender
   m_TagString: purpleAgent
@@ -8464,7 +8504,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debugCommandLineOverride: 
---- !u!114 &805942984620441706
+--- !u!114 &8431341109622145283
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8477,7 +8517,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SensorName: VectorSensor
-  m_ObservationSize: 0
+  m_ObservationSize: 6
   m_ObservationType: 0
   m_ObservationStacks: 1
 --- !u!1 &7654418492400491754
