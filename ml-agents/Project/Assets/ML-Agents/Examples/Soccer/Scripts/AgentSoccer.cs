@@ -321,10 +321,9 @@ public class AgentSoccer : Agent
                 }
             }
             else{
-                AddReward(3f); //Recompensa extra por tocar el balon antes que nadie
+                AddReward(1.5f * m_BallTouch); //Recompensa extra por tocar el balon antes que nadie
             }
-            //AddReward(1f * m_BallTouch);
-            AddReward(2f);
+            AddReward(1f * m_BallTouch);
             var dir = c.contacts[0].point - transform.position;
             dir = dir.normalized;
             c.gameObject.GetComponent<Rigidbody>().AddForce(dir * force);
