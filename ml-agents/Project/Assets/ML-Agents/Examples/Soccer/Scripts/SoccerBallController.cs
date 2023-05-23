@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class SoccerBallController : MonoBehaviour
 {
+    public AgentSoccer lastTouch;
     public GameObject area;
     [HideInInspector]
     public SoccerEnvController envController;
@@ -11,17 +12,21 @@ public class SoccerBallController : MonoBehaviour
     void Start()
     {
         envController = area.GetComponent<SoccerEnvController>();
+
     }
 
     void OnCollisionEnter(Collision col)
     {
         if (col.gameObject.CompareTag(purpleGoalTag)) //ball touched purple goal
         {
-            envController.GoalTouched(Team.Blue);
+            envController.GoalTouched(Team.Blue, lastTouch);
         }
         if (col.gameObject.CompareTag(blueGoalTag)) //ball touched blue goal
         {
-            envController.GoalTouched(Team.Purple);
+            envController.GoalTouched(Team.Purple, lastTouch);
         }
+    }
+    public void touchedBy(AgentSoccer agentLastTouch){
+        lastTouch = agentLastTouch;
     }
 }

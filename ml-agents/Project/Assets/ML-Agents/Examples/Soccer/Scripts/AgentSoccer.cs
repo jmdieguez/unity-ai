@@ -33,7 +33,8 @@ public class AgentSoccer : Agent
         Striker,
         Goalie,
         Generic,
-        Defender
+        Defender,
+        Midfielder
     }
 
     [HideInInspector]
@@ -50,6 +51,11 @@ public class AgentSoccer : Agent
     float m_LateralSpeed;
     float m_ForwardSpeed;
 
+    private int stepsWithoutTouchingBall; // Variable para realizar un seguimiento de los pasos sin tocar el balón
+    private bool hasTouchedBall = false;
+
+
+
 
     [HideInInspector]
     public Rigidbody agentRb;
@@ -58,12 +64,14 @@ public class AgentSoccer : Agent
     BehaviorParameters m_BehaviorParameters;
     public Vector3 initialPos;
     public float rotSign;
+    private bool inField;
+    SoccerEnvController envController;
 
     EnvironmentParameters m_ResetParams;
 
     public override void Initialize()
     {
-        SoccerEnvController envController = GetComponentInParent<SoccerEnvController>();
+        envController = GetComponentInParent<SoccerEnvController>();
         if (envController != null)
         {
             m_Existential = 1f / envController.MaxEnvironmentSteps;
@@ -94,11 +102,16 @@ public class AgentSoccer : Agent
         else if (position == Position.Striker)
         {
             m_LateralSpeed = 0.3f;
-            m_ForwardSpeed = 1.3f;
+            m_ForwardSpeed = 1.2f;
+        }
+        else if (position == Position.Midfielder)
+        {
+            m_LateralSpeed = 0.4f;
+            m_ForwardSpeed = 1.5f;
         }
         else
         {
-            m_LateralSpeed = 0.3f;
+            m_LateralSpeed = 0.4f;
             m_ForwardSpeed = 1.0f;
         }
         m_SoccerSettings = FindObjectOfType<SoccerSettings>();
@@ -107,7 +120,6 @@ public class AgentSoccer : Agent
 
         m_ResetParams = Academy.Instance.EnvironmentParameters;
     }
-
     public void MoveAgent(ActionSegment<int> act)
     {
         var dirToGo = Vector3.zero;
@@ -123,7 +135,7 @@ public class AgentSoccer : Agent
         {
             case 1:
                 dirToGo = transform.forward * m_ForwardSpeed;
-                m_KickPower = 1f;
+                m_KickPower = 2f;
                 break;
             case 2:
                 dirToGo = transform.forward * -m_ForwardSpeed;
@@ -155,21 +167,43 @@ public class AgentSoccer : Agent
             ForceMode.VelocityChange);
     }
 
-    void OnTriggerEnter(Collider other)
+    void OnTriggerStay(Collider other)
     {   
          if (other.gameObject == field.gameObject)
          {
-            AddReward(fieldReward);
+            inField = true;
          }
-         else
+    }
+    void OnTriggerExit(Collider other)
+    {   
+         if (other.gameObject == field.gameObject)
          {
-            AddReward(fieldPenalty);
+            inField = false;
          }
+    }
+    
+    void fieldRecompense(){
+         if (inField)
+        {
+            // Aplica una recompensa por estar dentro del campo
+            AddReward(fieldReward);
+        }
+        else
+        {
+            // Aplica una penalización por salir del campo
+            AddReward(fieldPenalty);
+        }
+    }
+
+    public void nearToBall(){
+        if(envController.isNearToBall(this)){
+            AddReward(0.1f);
+        }
     }
 
     public override void OnActionReceived(ActionBuffers actionBuffers)
-
     {   
+        
         if (position == Position.Defender)
         {
             // Existential bonus for Defenders.
@@ -182,12 +216,36 @@ public class AgentSoccer : Agent
             AddReward(m_Existential);
 
         }
+        if (position == Position.Midfielder)
+        {
+            // Existential bonus for Midfielders.
+            AddReward(-m_Existential/2);
+
+        }
         else if (position == Position.Striker)
         {
             // Existential penalty for Strikers
             AddReward(-m_Existential);
         }
+        /*
+        fieldRecompense();*/
 
+        if (!hasTouchedBall)
+        {
+            stepsWithoutTouchingBall++;
+        }
+        else
+        {
+            stepsWithoutTouchingBall = 0;
+            hasTouchedBall = false;
+        }
+
+        // Penaliza si el agente pasa demasiados pasos sin tocar el balón
+        if (stepsWithoutTouchingBall >= 7000) // Ajusta el número de pasos sin tocar el balón
+        {
+            AddReward(-0.01f); // Aplica una penalización por falta de interacción con el balón
+        }
+        nearToBall();
         MoveAgent(actionBuffers.DiscreteActions);
     }
 
@@ -229,22 +287,55 @@ public class AgentSoccer : Agent
     void OnCollisionEnter(Collision c)
     {
         var force = k_Power * m_KickPower;
-        if (position == Position.Goalie)
-        {
-            force = k_Power;
-        }
         if (c.gameObject.CompareTag("ball"))
         {
-            AddReward(.2f * m_BallTouch);
+            hasTouchedBall = true;
+            var lastTouched = c.gameObject.GetComponent<SoccerBallController>().lastTouch;
+            if(lastTouched)
+            {
+                if(position == Position.Goalie)
+                {
+                force = k_Power;
+                if(team != lastTouched.team )
+                {
+                    AddReward(2f * m_BallTouch);
+                    Debug.Log("Atajada");  // Si el arquero toca el balon cuando la habia tocado alguien del otro equipo se lo recompensa
+                }
+                }
+                if(position == Position.Defender)
+                {
+                if(team != lastTouched.team )
+                {
+                    AddReward(.5f * m_BallTouch);
+                    Debug.Log("Balon Recuperado");  // Si el defensor toca el balon cuando la habia tocado alguien del otro equipo se lo recompensa
+                }
+                
+                }
+                if(position == Position.Midfielder)
+                {
+                if(this == lastTouched )
+                {
+                    AddReward(1f * m_BallTouch);
+                    Debug.Log("Regate");  // Si el Toca mas de una vez seguida la pelota se lo premia
+                }
+                }
+            }
+            else{
+                AddReward(3f); //Recompensa extra por tocar el balon antes que nadie
+            }
+            //AddReward(1f * m_BallTouch);
+            AddReward(2f);
             var dir = c.contacts[0].point - transform.position;
             dir = dir.normalized;
             c.gameObject.GetComponent<Rigidbody>().AddForce(dir * force);
+            c.gameObject.GetComponent<SoccerBallController>().touchedBy(this);
         }
     }
 
     public override void OnEpisodeBegin()
     {
-        m_BallTouch = m_ResetParams.GetWithDefault("ball_touch", 0);
+        m_BallTouch = m_ResetParams.GetWithDefault("ball_touch", 1);
+        stepsWithoutTouchingBall = 0;
     }
 
 }
