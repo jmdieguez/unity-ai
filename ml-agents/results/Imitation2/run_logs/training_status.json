@@ -1,0 +1,48 @@
+{
+    "SoccerTwos": {
+        "checkpoints": [
+            {
+                "steps": 499971,
+                "file_path": "results\\Imitation2\\SoccerTwos\\SoccerTwos-499971.onnx",
+                "reward": 0.9238476953907816,
+                "creation_time": 1684758591.667832,
+                "auxillary_file_paths": [
+                    "results\\Imitation2\\SoccerTwos\\SoccerTwos-499971.pt"
+                ]
+            },
+            {
+                "steps": 999982,
+                "file_path": "results\\Imitation2\\SoccerTwos\\SoccerTwos-999982.onnx",
+                "reward": 0.9743589743589743,
+                "creation_time": 1684759993.3639443,
+                "auxillary_file_paths": [
+                    "results\\Imitation2\\SoccerTwos\\SoccerTwos-999982.pt"
+                ]
+            },
+            {
+                "steps": 1027866,
+                "file_path": "results\\Imitation2\\SoccerTwos\\SoccerTwos-1027866.onnx",
+                "reward": 0.9633911368015414,
+                "creation_time": 1684760068.9607131,
+                "auxillary_file_paths": [
+                    "results\\Imitation2\\SoccerTwos\\SoccerTwos-1027866.pt"
+                ]
+            }
+        ],
+        "elo": 1196.684394729092,
+        "final_checkpoint": {
+            "steps": 1027866,
+            "file_path": "results\\Imitation2\\SoccerTwos.onnx",
+            "reward": 0.9633911368015414,
+            "creation_time": 1684760068.9607131,
+            "auxillary_file_paths": [
+                "results\\Imitation2\\SoccerTwos\\SoccerTwos-1027866.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}

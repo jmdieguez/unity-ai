@@ -1,0 +1,57 @@
+{
+    "SoccerTwos": {
+        "checkpoints": [
+            {
+                "steps": 499994,
+                "file_path": "results\\multipleRun\\SoccerTwos\\SoccerTwos-499994.onnx",
+                "reward": 54.0973335396736,
+                "creation_time": 1684594651.6303828,
+                "auxillary_file_paths": [
+                    "results\\multipleRun\\SoccerTwos\\SoccerTwos-499994.pt"
+                ]
+            },
+            {
+                "steps": 999968,
+                "file_path": "results\\multipleRun\\SoccerTwos\\SoccerTwos-999968.onnx",
+                "reward": 52.90719281029039,
+                "creation_time": 1684595762.0836647,
+                "auxillary_file_paths": [
+                    "results\\multipleRun\\SoccerTwos\\SoccerTwos-999968.pt"
+                ]
+            },
+            {
+                "steps": 1499940,
+                "file_path": "results\\multipleRun\\SoccerTwos\\SoccerTwos-1499940.onnx",
+                "reward": 48.28434738447182,
+                "creation_time": 1684596890.3151653,
+                "auxillary_file_paths": [
+                    "results\\multipleRun\\SoccerTwos\\SoccerTwos-1499940.pt"
+                ]
+            },
+            {
+                "steps": 1999976,
+                "file_path": "results\\multipleRun\\SoccerTwos\\SoccerTwos-1999976.onnx",
+                "reward": 48.33392850151873,
+                "creation_time": 1684598012.0420046,
+                "auxillary_file_paths": [
+                    "results\\multipleRun\\SoccerTwos\\SoccerTwos-1999976.pt"
+                ]
+            },
+            {
+                "steps": 2499998,
+                "file_path": "results\\multipleRun\\SoccerTwos\\SoccerTwos-2499998.onnx",
+                "reward": 47.448508251757815,
+                "creation_time": 1684599176.788057,
+                "auxillary_file_paths": [
+                    "results\\multipleRun\\SoccerTwos\\SoccerTwos-2499998.pt"
+                ]
+            }
+        ],
+        "elo": 1217.625168537521
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}
