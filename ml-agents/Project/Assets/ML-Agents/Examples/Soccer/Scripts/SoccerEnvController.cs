@@ -113,7 +113,7 @@ public class SoccerEnvController : MonoBehaviour
                 agentScorer.makeOwnGoal(); // Se penaliza al agente que hizo el gol en contra
                 Debug.Log("Gol Azul (En contra violeta)");
             }
-            goalsBlue.Goal(); // Para entrenar esta linea debe de comentarse
+            //goalsBlue.Goal(); // Para entrenar esta linea debe de comentarse
         }
         else
         {
@@ -127,8 +127,7 @@ public class SoccerEnvController : MonoBehaviour
                 agentScorer.makeOwnGoal(); // Se penaliza al agente que hizo el gol en contra
                 Debug.Log("Gol Violeta (En contra azul)");
             }
-
-            goalsPurple.Goal(); // Para entrenar esta linea debe de comentarse
+            //goalsPurple.Goal(); // Para entrenar esta linea debe de comentarse
         }
         m_PurpleAgentGroup.EndGroupEpisode();
         m_BlueAgentGroup.EndGroupEpisode();

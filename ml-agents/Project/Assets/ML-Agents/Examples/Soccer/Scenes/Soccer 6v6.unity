@@ -650,7 +650,7 @@ PrefabInstance:
     - target: {fileID: 3067404038201802092, guid: 002c89bccac3f3a4f977f1eb0be5b8eb,
         type: 3}
       propertyPath: fieldReward
-      value: 0.2
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 3067404038201802092, guid: 002c89bccac3f3a4f977f1eb0be5b8eb,
         type: 3}
@@ -925,7 +925,7 @@ PrefabInstance:
     - target: {fileID: 8384674413469815055, guid: 002c89bccac3f3a4f977f1eb0be5b8eb,
         type: 3}
       propertyPath: fieldReward
-      value: 0.2
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 8384674413469815055, guid: 002c89bccac3f3a4f977f1eb0be5b8eb,
         type: 3}
