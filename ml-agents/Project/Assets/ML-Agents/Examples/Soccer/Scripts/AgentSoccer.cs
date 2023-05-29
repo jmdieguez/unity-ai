@@ -197,15 +197,15 @@ public class AgentSoccer : Agent
 
     public void makeGoal(){
         if((position != Position.Goalie)){ //Los arqueros deberian no hacer goles, su roll es quedarse en el arco
-                AddReward(2f); 
+                AddReward(1.5f); 
         }
         else if((position == Position.Striker)){ //Los delanteros tienen un extra por hacer un gol
-                AddReward(1f); 
+                AddReward(0.5f); 
         }
     }
     public void makeOwnGoal(){
         if((position != Position.Goalie)){
-                AddReward(-3f);
+                AddReward(-1.5f);
         }
         else{
             AddReward(-0.5f); //Un arquero no deberia ser tan penalizado por hacerlo en contra, se supone que quiso atajar
@@ -235,12 +235,8 @@ public class AgentSoccer : Agent
 
     public override void OnActionReceived(ActionBuffers actionBuffers)
     {   
-        if (position == Position.Goalie)
-        {
-            // Existential bonus for Goalies.
-            //AddReward(m_Existential); Los arqueros no tiene bonus existencial, su bonus se basa en no salir del area
-
-        }
+        //Los arqueros no tiene bonus existencial, su bonus se basa en no salir del area
+        
         if (position == Position.Defender)
         {
             // Existential bonus for Defenders.
@@ -283,7 +279,7 @@ public class AgentSoccer : Agent
 
             }
             else{
-                AddReward(-0.05f); // Aplica una penalización por falta de interacción con el balón
+                AddReward(-0.09f); // Aplica una penalización por falta de interacción con el balón
             }
         }
     }
@@ -368,13 +364,12 @@ public class AgentSoccer : Agent
                 force = k_Power;
                     if(!inField)
                     {
-                         AddReward(-2.5f); //Si el arquero toca el balon fuera de su area, se lo castiga
+                         AddReward(-3.0f); //Si el arquero toca el balon fuera de su area, se lo castiga
                     }
                     else{
                         if(team != lastTouched.team)
                         {
-                            AddReward(2f);
-                            Debug.Log("Atajada");  // Si el arquero toca el balon cuando la habia tocado alguien del otro equipo se lo recompensa
+                            AddReward(2f);  // Si el arquero toca el balon cuando la habia tocado alguien del otro equipo se lo recompensa
                         }
                     }
                     
@@ -383,8 +378,7 @@ public class AgentSoccer : Agent
                 {
                 if(team != lastTouched.team )
                 {
-                    AddReward(0.5f);
-                    Debug.Log("Balon Recuperado");  // Si el defensor toca el balon cuando la habia tocado alguien del otro equipo se lo recompensa
+                    AddReward(0.5f);// Si el defensor toca el balon cuando la habia tocado alguien del otro equipo se lo recompensa
                 }
                 
                 }
@@ -392,11 +386,10 @@ public class AgentSoccer : Agent
                 {
                 if(this == lastTouched )
                 {
-                    AddReward(1.0f);
-                    Debug.Log("Regate");  // Si el mediocampista Toca mas de una vez seguida la pelota se lo premia
+                    AddReward(1.0f);// Si el mediocampista Toca mas de una vez seguida la pelota se lo premia
                 }
                 }
-                if(lastTouched.team == team){
+                if(lastTouched.team == team && (this != lastTouched)){
                     lastTouched.AddReward(0.5f); // Recompensa por hacer un pase
                     envController.succesfullPass(team);
 
@@ -405,7 +398,7 @@ public class AgentSoccer : Agent
             else{
                 AddReward(1.0f); //Recompensa extra por tocar el balon antes que nadie
             }
-            AddReward(0.5f );
+            AddReward(0.8f );
             var dir = c.contacts[0].point - transform.position;
             dir = dir.normalized;
             c.gameObject.GetComponent<Rigidbody>().AddForce(dir * force);
