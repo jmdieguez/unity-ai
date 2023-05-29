@@ -46,6 +46,9 @@ public class SoccerEnvController : MonoBehaviour
     private SimpleMultiAgentGroup m_PurpleAgentGroup;
 
     private int m_ResetTimer;
+    
+    public GoalScript goalsBlue;
+    public GoalScript goalsPurple;
 
     void Start()
     {
@@ -104,11 +107,13 @@ public class SoccerEnvController : MonoBehaviour
             m_PurpleAgentGroup.AddGroupReward(-1);
             if(agentScorer.team == Team.Blue){
                 agentScorer.makeGoal(); // Se recompensa al agente que hizo el gol si es del equipo azul
+                Debug.Log("Gol Azul");
             }
             else{
                 agentScorer.makeOwnGoal(); // Se penaliza al agente que hizo el gol en contra
+                Debug.Log("Gol Azul (En contra violeta)");
             }
-            Debug.Log("Gol Azul");
+            goalsBlue.Goal(); // Para entrenar esta linea debe de comentarse
         }
         else
         {
@@ -116,11 +121,14 @@ public class SoccerEnvController : MonoBehaviour
             m_BlueAgentGroup.AddGroupReward(-1);
             if(agentScorer.team == Team.Purple){
                 agentScorer.makeGoal(); // Se recompensa al agente que hizo el gol si es del equipo violeta
+                Debug.Log("Gol Violeta");
             }
             else{
                 agentScorer.makeOwnGoal(); // Se penaliza al agente que hizo el gol en contra
+                Debug.Log("Gol Violeta (En contra azul)");
             }
-            Debug.Log("Gol Violeta");
+
+            goalsPurple.Goal(); // Para entrenar esta linea debe de comentarse
         }
         m_PurpleAgentGroup.EndGroupEpisode();
         m_BlueAgentGroup.EndGroupEpisode();

@@ -446,6 +446,7 @@ GameObject:
   - component: {fileID: 287447622}
   - component: {fileID: 287447624}
   - component: {fileID: 287447623}
+  - component: {fileID: 287447625}
   m_Layer: 5
   m_Name: Marcador
   m_TagString: Untagged
@@ -514,6 +515,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 287447621}
   m_CullTransparentMesh: 1
+--- !u!114 &287447625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 287447621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55c90ef0804133645b0d30ee3daf8ef5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timerText: {fileID: 1294503950}
 --- !u!1001 &526467323
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -788,6 +802,11 @@ PrefabInstance:
       propertyPath: m_RayLayerMask.m_Bits
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 6184262681400583112, guid: 002c89bccac3f3a4f977f1eb0be5b8eb,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: b59c17ee01fed804fa428044dba1c179, type: 2}
     - target: {fileID: 6212241980363819063, guid: 002c89bccac3f3a4f977f1eb0be5b8eb,
         type: 3}
       propertyPath: m_Model
@@ -805,6 +824,16 @@ PrefabInstance:
       propertyPath: m_BehaviorType
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6486831398462043642, guid: 002c89bccac3f3a4f977f1eb0be5b8eb,
+        type: 3}
+      propertyPath: goalsBlue
+      value: 
+      objectReference: {fileID: 1745510144}
+    - target: {fileID: 6486831398462043642, guid: 002c89bccac3f3a4f977f1eb0be5b8eb,
+        type: 3}
+      propertyPath: goalsPurple
+      value: 
+      objectReference: {fileID: 2106921786}
     - target: {fileID: 6486831398462043642, guid: 002c89bccac3f3a4f977f1eb0be5b8eb,
         type: 3}
       propertyPath: MaxEnvironmentSteps
@@ -883,6 +912,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8348090237431001622, guid: 002c89bccac3f3a4f977f1eb0be5b8eb,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: b0da1813c36914e678ba57f2790424e1, type: 2}
     - target: {fileID: 8384674413469815055, guid: 002c89bccac3f3a4f977f1eb0be5b8eb,
         type: 3}
       propertyPath: ball
@@ -1093,10 +1127,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 60
+    m_FontSize: 55
     m_FontStyle: 1
     m_BestFit: 0
-    m_MinSize: 6
+    m_MinSize: 5
     m_MaxSize: 60
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -1316,6 +1350,7 @@ GameObject:
   - component: {fileID: 1745510141}
   - component: {fileID: 1745510143}
   - component: {fileID: 1745510142}
+  - component: {fileID: 1745510144}
   m_Layer: 5
   m_Name: ContenedorLocal
   m_TagString: Untagged
@@ -1382,6 +1417,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1745510140}
   m_CullTransparentMesh: 1
+--- !u!114 &1745510144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1745510140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c8016870b6a2b64e907709aac16c822, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 1630210599}
 --- !u!1 &2106921782
 GameObject:
   m_ObjectHideFlags: 0
@@ -1393,6 +1441,7 @@ GameObject:
   - component: {fileID: 2106921783}
   - component: {fileID: 2106921785}
   - component: {fileID: 2106921784}
+  - component: {fileID: 2106921786}
   m_Layer: 5
   m_Name: ContenedorVisita
   m_TagString: Untagged
@@ -1459,3 +1508,16 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2106921782}
   m_CullTransparentMesh: 1
+--- !u!114 &2106921786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2106921782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c8016870b6a2b64e907709aac16c822, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 263316377}
