@@ -1,0 +1,66 @@
+{
+    "SoccerTwos": {
+        "checkpoints": [
+            {
+                "steps": 3499942,
+                "file_path": "results\\GolEnContra2\\SoccerTwos\\SoccerTwos-3499942.onnx",
+                "reward": -189.5260134379069,
+                "creation_time": 1685410634.0580895,
+                "auxillary_file_paths": [
+                    "results\\GolEnContra2\\SoccerTwos\\SoccerTwos-3499942.pt"
+                ]
+            },
+            {
+                "steps": 3999976,
+                "file_path": "results\\GolEnContra2\\SoccerTwos\\SoccerTwos-3999976.onnx",
+                "reward": -31.2807204524676,
+                "creation_time": 1685411771.039153,
+                "auxillary_file_paths": [
+                    "results\\GolEnContra2\\SoccerTwos\\SoccerTwos-3999976.pt"
+                ]
+            },
+            {
+                "steps": 4499976,
+                "file_path": "results\\GolEnContra2\\SoccerTwos\\SoccerTwos-4499976.onnx",
+                "reward": -23.710695389244293,
+                "creation_time": 1685412880.967891,
+                "auxillary_file_paths": [
+                    "results\\GolEnContra2\\SoccerTwos\\SoccerTwos-4499976.pt"
+                ]
+            },
+            {
+                "steps": 4999940,
+                "file_path": "results\\GolEnContra2\\SoccerTwos\\SoccerTwos-4999940.onnx",
+                "reward": null,
+                "creation_time": 1685414012.729089,
+                "auxillary_file_paths": [
+                    "results\\GolEnContra2\\SoccerTwos\\SoccerTwos-4999940.pt"
+                ]
+            },
+            {
+                "steps": 5280426,
+                "file_path": "results\\GolEnContra2\\SoccerTwos\\SoccerTwos-5280426.onnx",
+                "reward": -18.774640440940857,
+                "creation_time": 1685414668.47281,
+                "auxillary_file_paths": [
+                    "results\\GolEnContra2\\SoccerTwos\\SoccerTwos-5280426.pt"
+                ]
+            }
+        ],
+        "elo": 866.2214690624993,
+        "final_checkpoint": {
+            "steps": 5280426,
+            "file_path": "results\\GolEnContra2\\SoccerTwos.onnx",
+            "reward": -18.774640440940857,
+            "creation_time": 1685414668.47281,
+            "auxillary_file_paths": [
+                "results\\GolEnContra2\\SoccerTwos\\SoccerTwos-5280426.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}

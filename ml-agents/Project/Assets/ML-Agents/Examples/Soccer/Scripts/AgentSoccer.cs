@@ -205,10 +205,11 @@ public class AgentSoccer : Agent
     }
     public void makeOwnGoal(){
         if((position != Position.Goalie)){
-                AddReward(-1.5f);
+                AddReward(-5.5f);
         }
         else{
-            AddReward(-0.5f); //Un arquero no deberia ser tan penalizado por hacerlo en contra, se supone que quiso atajar
+            AddReward(-1.0f); //Un arquero no deberia ser tan penalizado por hacerlo en contra, se supone que quiso atajar
+            Debug.Log("Arquero Gol En propia");
         }
     }
 
@@ -228,7 +229,7 @@ public class AgentSoccer : Agent
         }
         else{
             if(position != Position.Goalie){
-                AddReward(0.075f);
+                AddReward(0.2f);
             }
         }
     }
@@ -245,13 +246,13 @@ public class AgentSoccer : Agent
         if (position == Position.Midfielder)
         {
             // Existential bonus for Midfielders.
-            AddReward(-m_Existential/2);
+            AddReward(-m_Existential/4);
 
         }
         else if (position == Position.Striker)
         {
             // Existential penalty for Strikers
-            AddReward(-m_Existential);
+            AddReward(-m_Existential/2);
         }
         
         fieldRecompense();
@@ -272,14 +273,14 @@ public class AgentSoccer : Agent
         }
 
         // Penaliza si el agente pasa demasiados pasos sin tocar el balón
-        if ((stepsWithoutTouchingBall >= 3000) && (position != Position.Goalie)) // Los arqueros no reciben esta penalizacion
+        if ((stepsWithoutTouchingBall >= 2500) && (position != Position.Goalie)) // Los arqueros no reciben esta penalizacion
         {   
             if(position == Position.Defender){
-                AddReward(-0.01f); // Aplica una penalización por falta de interacción con el balón
+                AddReward(-0.05f); // Aplica una penalización por falta de interacción con el balón
 
             }
             else{
-                AddReward(-0.09f); // Aplica una penalización por falta de interacción con el balón
+                AddReward(-0.15f); // Aplica una penalización por falta de interacción con el balón
             }
         }
     }
