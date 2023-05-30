@@ -2,59 +2,59 @@
     "SoccerTwos": {
         "checkpoints": [
             {
-                "steps": 3499942,
-                "file_path": "results\\GolEnContra2\\SoccerTwos\\SoccerTwos-3499942.onnx",
-                "reward": -189.5260134379069,
-                "creation_time": 1685410634.0580895,
+                "steps": 18999956,
+                "file_path": "results\\GolEnContra2\\SoccerTwos\\SoccerTwos-18999956.onnx",
+                "reward": -20.398665219545364,
+                "creation_time": 1685445761.991421,
                 "auxillary_file_paths": [
-                    "results\\GolEnContra2\\SoccerTwos\\SoccerTwos-3499942.pt"
+                    "results\\GolEnContra2\\SoccerTwos\\SoccerTwos-18999956.pt"
                 ]
             },
             {
-                "steps": 3999976,
-                "file_path": "results\\GolEnContra2\\SoccerTwos\\SoccerTwos-3999976.onnx",
-                "reward": -31.2807204524676,
-                "creation_time": 1685411771.039153,
+                "steps": 19499990,
+                "file_path": "results\\GolEnContra2\\SoccerTwos\\SoccerTwos-19499990.onnx",
+                "reward": 2.9716498851776123,
+                "creation_time": 1685446890.8276494,
                 "auxillary_file_paths": [
-                    "results\\GolEnContra2\\SoccerTwos\\SoccerTwos-3999976.pt"
+                    "results\\GolEnContra2\\SoccerTwos\\SoccerTwos-19499990.pt"
                 ]
             },
             {
-                "steps": 4499976,
-                "file_path": "results\\GolEnContra2\\SoccerTwos\\SoccerTwos-4499976.onnx",
-                "reward": -23.710695389244293,
-                "creation_time": 1685412880.967891,
-                "auxillary_file_paths": [
-                    "results\\GolEnContra2\\SoccerTwos\\SoccerTwos-4499976.pt"
-                ]
-            },
-            {
-                "steps": 4999940,
-                "file_path": "results\\GolEnContra2\\SoccerTwos\\SoccerTwos-4999940.onnx",
+                "steps": 19999998,
+                "file_path": "results\\GolEnContra2\\SoccerTwos\\SoccerTwos-19999998.onnx",
                 "reward": null,
-                "creation_time": 1685414012.729089,
+                "creation_time": 1685448020.520247,
                 "auxillary_file_paths": [
-                    "results\\GolEnContra2\\SoccerTwos\\SoccerTwos-4999940.pt"
+                    "results\\GolEnContra2\\SoccerTwos\\SoccerTwos-19999998.pt"
                 ]
             },
             {
-                "steps": 5280426,
-                "file_path": "results\\GolEnContra2\\SoccerTwos\\SoccerTwos-5280426.onnx",
-                "reward": -18.774640440940857,
-                "creation_time": 1685414668.47281,
+                "steps": 20499976,
+                "file_path": "results\\GolEnContra2\\SoccerTwos\\SoccerTwos-20499976.onnx",
+                "reward": 30.24344378709793,
+                "creation_time": 1685449131.7973628,
                 "auxillary_file_paths": [
-                    "results\\GolEnContra2\\SoccerTwos\\SoccerTwos-5280426.pt"
+                    "results\\GolEnContra2\\SoccerTwos\\SoccerTwos-20499976.pt"
+                ]
+            },
+            {
+                "steps": 20724186,
+                "file_path": "results\\GolEnContra2\\SoccerTwos\\SoccerTwos-20724186.onnx",
+                "reward": 30.44046312967936,
+                "creation_time": 1685449631.3313348,
+                "auxillary_file_paths": [
+                    "results\\GolEnContra2\\SoccerTwos\\SoccerTwos-20724186.pt"
                 ]
             }
         ],
-        "elo": 866.2214690624993,
+        "elo": 291.24501846274285,
         "final_checkpoint": {
-            "steps": 5280426,
+            "steps": 20724186,
             "file_path": "results\\GolEnContra2\\SoccerTwos.onnx",
-            "reward": -18.774640440940857,
-            "creation_time": 1685414668.47281,
+            "reward": 30.44046312967936,
+            "creation_time": 1685449631.3313348,
             "auxillary_file_paths": [
-                "results\\GolEnContra2\\SoccerTwos\\SoccerTwos-5280426.pt"
+                "results\\GolEnContra2\\SoccerTwos\\SoccerTwos-20724186.pt"
             ]
         }
     },
