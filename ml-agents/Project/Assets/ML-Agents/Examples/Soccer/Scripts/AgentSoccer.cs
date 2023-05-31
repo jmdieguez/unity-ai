@@ -55,7 +55,7 @@ public class AgentSoccer : Agent
     private bool hasTouchedBall = false;
 
 
-
+    public GameObject enemyGoal;
 
     [HideInInspector]
     public Rigidbody agentRb;
@@ -197,10 +197,10 @@ public class AgentSoccer : Agent
 
     public void makeGoal(){
         if((position != Position.Goalie)){ //Los arqueros deberian no hacer goles, su roll es quedarse en el arco
-                AddReward(1.5f); 
+                AddReward(1.9f); 
         }
         else if((position == Position.Striker)){ //Los delanteros tienen un extra por hacer un gol
-                AddReward(0.5f); 
+                AddReward(0.9f); 
         }
     }
     public void makeOwnGoal(){
@@ -225,11 +225,6 @@ public class AgentSoccer : Agent
             }
             if(position == Position.Defender){
                 AddReward(-0.05f);
-            }
-        }
-        else{
-            if(position != Position.Goalie){
-                AddReward(0.2f);
             }
         }
     }
@@ -273,14 +268,24 @@ public class AgentSoccer : Agent
         }
 
         // Penaliza si el agente pasa demasiados pasos sin tocar el balón
-        if ((stepsWithoutTouchingBall >= 2500) && (position != Position.Goalie)) // Los arqueros no reciben esta penalizacion
+        if ((stepsWithoutTouchingBall >= 1950) && (position != Position.Goalie)) // Los arqueros no reciben esta penalizacion
         {   
             if(position == Position.Defender){
                 AddReward(-0.05f); // Aplica una penalización por falta de interacción con el balón
 
             }
             else{
-                AddReward(-0.15f); // Aplica una penalización por falta de interacción con el balón
+                AddReward(-0.5f); // Aplica una penalización por falta de interacción con el balón
+            }
+        }
+        if ((stepsWithoutTouchingBall < 1000) && (position != Position.Goalie)) // Los arqueros no reciben esta compensacion
+        {   
+            if(position == Position.Defender){
+                AddReward(0.05f);
+
+            }
+            else{
+                AddReward(0.15f); 
             }
         }
     }
@@ -337,9 +342,18 @@ public class AgentSoccer : Agent
         }
     }
 
-    /// <summary>
-    /// Used to provide a "kick" to the ball.
-    /// </summary>
+    public void kickToEnemyGoal(Vector3 dir){
+        if (Vector3.Dot(dir, enemyGoal.transform.position - transform.position) > 0.85f)
+    {
+        AddReward(0.15f); // Recompensa por patear hacia el arco rival
+        Debug.Log("Se pateo al arco rival");
+    }
+    else
+    {
+        AddReward(-0.001f); // Penalización por patear en dirección opuesta al arco rival
+    }
+    }
+
     void OnCollisionEnter(Collision c)
     {
 
@@ -399,9 +413,14 @@ public class AgentSoccer : Agent
             else{
                 AddReward(1.0f); //Recompensa extra por tocar el balon antes que nadie
             }
-            AddReward(0.8f );
+            AddReward(1.9f );
             var dir = c.contacts[0].point - transform.position;
             dir = dir.normalized;
+            if(position != Position.Goalie)
+            {
+                kickToEnemyGoal(dir);
+            }
+    
             c.gameObject.GetComponent<Rigidbody>().AddForce(dir * force);
             c.gameObject.GetComponent<SoccerBallController>().touchedBy(this);
         }

@@ -1,0 +1,66 @@
+{
+    "SoccerTwos": {
+        "checkpoints": [
+            {
+                "steps": 4499974,
+                "file_path": "results\\TouchBall\\SoccerTwos\\SoccerTwos-4499974.onnx",
+                "reward": 129.87048045448634,
+                "creation_time": 1685496578.6676917,
+                "auxillary_file_paths": [
+                    "results\\TouchBall\\SoccerTwos\\SoccerTwos-4499974.pt"
+                ]
+            },
+            {
+                "steps": 4999992,
+                "file_path": "results\\TouchBall\\SoccerTwos\\SoccerTwos-4999992.onnx",
+                "reward": 432.21843306223553,
+                "creation_time": 1685498944.4115875,
+                "auxillary_file_paths": [
+                    "results\\TouchBall\\SoccerTwos\\SoccerTwos-4999992.pt"
+                ]
+            },
+            {
+                "steps": 5499959,
+                "file_path": "results\\TouchBall\\SoccerTwos\\SoccerTwos-5499959.onnx",
+                "reward": 56.90822296142578,
+                "creation_time": 1685500191.8845854,
+                "auxillary_file_paths": [
+                    "results\\TouchBall\\SoccerTwos\\SoccerTwos-5499959.pt"
+                ]
+            },
+            {
+                "steps": 5999946,
+                "file_path": "results\\TouchBall\\SoccerTwos\\SoccerTwos-5999946.onnx",
+                "reward": 291.8177486232349,
+                "creation_time": 1685501413.3550684,
+                "auxillary_file_paths": [
+                    "results\\TouchBall\\SoccerTwos\\SoccerTwos-5999946.pt"
+                ]
+            },
+            {
+                "steps": 6425324,
+                "file_path": "results\\TouchBall\\SoccerTwos\\SoccerTwos-6425324.onnx",
+                "reward": 179.17388982006483,
+                "creation_time": 1685502584.5472326,
+                "auxillary_file_paths": [
+                    "results\\TouchBall\\SoccerTwos\\SoccerTwos-6425324.pt"
+                ]
+            }
+        ],
+        "elo": 1317.6798117538472,
+        "final_checkpoint": {
+            "steps": 6425324,
+            "file_path": "results\\TouchBall\\SoccerTwos.onnx",
+            "reward": 179.17388982006483,
+            "creation_time": 1685502584.5472326,
+            "auxillary_file_paths": [
+                "results\\TouchBall\\SoccerTwos\\SoccerTwos-6425324.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}
