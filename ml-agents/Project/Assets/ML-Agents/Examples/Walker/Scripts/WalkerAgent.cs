@@ -9,6 +9,12 @@ using Random = UnityEngine.Random;
 
 public class WalkerAgent : Agent
 {
+    private Vector3 previousFootLPosition;
+    private Vector3 previousFootRPosition;
+
+    private float footTimer;
+    private int leadingFoot;
+
     [Header("Walk Speed")]
     [Range(0.1f, 10)]
     [SerializeField]
@@ -61,6 +67,12 @@ public class WalkerAgent : Agent
 
     public override void Initialize()
     {
+        previousFootLPosition = footL.position;
+        previousFootRPosition = footR.position;
+
+        footTimer = 0f;
+        leadingFoot = UnityEngine.Random.Range(0, 2); // Randomly choose 0 or 1 (left or right foot)s
+
         m_OrientationCube = GetComponentInChildren<OrientationCubeController>();
         m_DirectionIndicator = GetComponentInChildren<DirectionIndicator>();
 
@@ -164,6 +176,9 @@ public class WalkerAgent : Agent
         {
             CollectObservationBodyPart(bodyPart, sensor);
         }
+
+        sensor.AddObservation(leadingFoot);
+        sensor.AddObservation(footTimer);
     }
 
     public override void OnActionReceived(ActionBuffers actionBuffers)
@@ -253,6 +268,44 @@ public class WalkerAgent : Agent
         }
 
         AddReward(matchSpeedReward * lookAtTargetReward);
+
+        // Update foot timer
+        footTimer += Time.deltaTime;
+
+        if (footTimer > 2.0f)
+        {
+            // Penalize if the leading foot remains in front for 2 seconds
+            AddReward(-1f);
+        }
+
+        Vector3 agentForward = transform.forward;
+
+        if (leadingFoot == 0) // Left foot is leading
+        {
+            Vector3 relativePosition = footR.position - footL.position;
+            float dotProduct = Vector3.Dot(relativePosition, agentForward);
+
+            if (dotProduct > 0f) // Right foot is in front of left foot
+            {
+                footTimer = 0f;
+                leadingFoot = 1; // Change the leading foot to the right foot
+            }
+        }
+        else if (leadingFoot == 1) // Right foot is leading
+        {
+            Vector3 relativePosition = footL.position - footR.position;
+            float dotProduct = Vector3.Dot(relativePosition, agentForward);
+
+            if (dotProduct > 0f) // Left foot is in front of right foot
+            {
+                footTimer = 0f;
+                leadingFoot = 0; // Change the leading foot to the left foot
+            }
+        }
+
+        // Update previous foot positions
+        previousFootLPosition = footL.position;
+        previousFootRPosition = footR.position;
     }
 
     //Returns the average velocity of all of the body parts
