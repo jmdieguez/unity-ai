@@ -12,8 +12,10 @@ public class WalkerAgent : Agent
     private Vector3 previousFootLPosition;
     private Vector3 previousFootRPosition;
 
+    private float stepLength;
     private float footTimer;
     private int leadingFoot;
+    Vector3 relativePosition;
 
     [Header("Walk Speed")]
     [Range(0.1f, 10)]
@@ -38,6 +40,8 @@ public class WalkerAgent : Agent
     private Vector3 m_WorldDirToWalk = Vector3.right;
 
     [Header("Target To Walk Towards")] public Transform target; //Target the agent will walk towards during training.
+
+    float distanceToTarget;
 
     [Header("Body Parts")] public Transform hips;
     public Transform chest;
@@ -67,12 +71,6 @@ public class WalkerAgent : Agent
 
     public override void Initialize()
     {
-        previousFootLPosition = footL.position;
-        previousFootRPosition = footR.position;
-
-        footTimer = 0f;
-        leadingFoot = UnityEngine.Random.Range(0, 2); // Randomly choose 0 or 1 (left or right foot)s
-
         m_OrientationCube = GetComponentInChildren<OrientationCubeController>();
         m_DirectionIndicator = GetComponentInChildren<DirectionIndicator>();
 
@@ -121,6 +119,12 @@ public class WalkerAgent : Agent
             randomizeWalkSpeedEachEpisode ? Random.Range(0.1f, m_maxWalkingSpeed) : MTargetWalkingSpeed;
 
         SetResetParameters();
+
+        previousFootLPosition = footL.position;
+        previousFootRPosition = footR.position;
+
+        footTimer = -2.0f;
+        leadingFoot = UnityEngine.Random.Range(0, 2); // Randomly choose 0 or 1 (left or right foot)
     }
 
     /// <summary>
@@ -128,7 +132,7 @@ public class WalkerAgent : Agent
     /// </summary>
     public void CollectObservationBodyPart(BodyPart bp, VectorSensor sensor)
     {
-        //GROUND CHECK
+        //GROUND CHECKs
         sensor.AddObservation(bp.groundContact.touchingGround); // Is this bp touching the ground
 
         //Get velocities in the context of our orientation cube's space
@@ -179,6 +183,7 @@ public class WalkerAgent : Agent
 
         sensor.AddObservation(leadingFoot);
         sensor.AddObservation(footTimer);
+        sensor.AddObservation(stepLength);
     }
 
     public override void OnActionReceived(ActionBuffers actionBuffers)
@@ -282,30 +287,83 @@ public class WalkerAgent : Agent
 
         if (leadingFoot == 0) // Left foot is leading
         {
-            Vector3 relativePosition = footR.position - footL.position;
+            relativePosition = footR.position - footL.position;
+            stepLength = relativePosition.magnitude;
             float dotProduct = Vector3.Dot(relativePosition, agentForward);
-
-            if (dotProduct > 0f) // Right foot is in front of left foot
+            // Right foot is in front of left foot and it touches the ground
+            
+            if ((dotProduct > 0) && (m_JdController.bodyPartsDict[footL].groundContact.touchingGround)
+                && (m_JdController.bodyPartsDict[footR].groundContact.touchingGround) && (stepLength > 1.5f))
             {
+                if (footTimer < 1f)
+                {
+                    AddReward(-0.1f);
+                }
+                else
+                {
+                    AddReward(0.1f);
+                }
+
                 footTimer = 0f;
                 leadingFoot = 1; // Change the leading foot to the right foot
             }
         }
+
         else if (leadingFoot == 1) // Right foot is leading
         {
-            Vector3 relativePosition = footL.position - footR.position;
+            relativePosition = footL.position - footR.position;
+            stepLength = relativePosition.magnitude;
             float dotProduct = Vector3.Dot(relativePosition, agentForward);
 
-            if (dotProduct > 0f) // Left foot is in front of right foot
+            // Left foot is in front of right foot and it touches the ground
+            if ((dotProduct > 0) && (m_JdController.bodyPartsDict[footL].groundContact.touchingGround)
+                && (m_JdController.bodyPartsDict[footR].groundContact.touchingGround) && (stepLength > 1.5f))
             {
+                if (footTimer < 1f)
+                {
+                    AddReward(-0.1f);
+                }
+                else
+                {
+                    AddReward(0.1f);
+                }
+
                 footTimer = 0f;
                 leadingFoot = 0; // Change the leading foot to the left foot
             }
         }
 
+        /*
+
         // Update previous foot positions
         previousFootLPosition = footL.position;
         previousFootRPosition = footR.position;
+
+        var chestRotation = m_JdController.bodyPartsDict[chest].rb.rotation;
+        var rotationThreshold = Quaternion.Euler(30f, 30f, 30f); // Adjust the threshold to suit your needs
+
+        // Calculate the difference between the chest rotation and the hips rotation
+        var rotationDifference = Quaternion.Angle(chestRotation, hips.rotation);
+
+        bool isChestRotationUnstable = rotationDifference > 30f || rotationDifference < -30f;
+
+        if (isChestRotationUnstable)
+        {
+            // Apply penalty for losing balance based on chest rotation
+            AddReward(-0.5f);
+        }
+        else
+        {
+            AddReward(0.1f);
+        }
+        */
+    }
+
+    // Check if the foot is close to the ground
+    private bool IsGrounded(Vector3 footPosition)
+    {
+        float groundThreshold = 0.1f; // Adjust this threshold as needed
+        return footPosition.y <= groundThreshold;
     }
 
     //Returns the average velocity of all of the body parts

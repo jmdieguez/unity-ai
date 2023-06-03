@@ -311,6 +311,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7819659174506835736, guid: 84359146bf7af47e58c229d877e801d7,
+        type: 3}
+      propertyPath: m_Model
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7819659174506835736, guid: 84359146bf7af47e58c229d877e801d7,
+        type: 3}
+      propertyPath: m_BrainParameters.VectorObservationSize
+      value: 246
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 84359146bf7af47e58c229d877e801d7, type: 3}
 --- !u!1001 &193531851
@@ -541,6 +551,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7819659174506835736, guid: 84359146bf7af47e58c229d877e801d7,
+        type: 3}
+      propertyPath: m_Model
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7819659174506835736, guid: 84359146bf7af47e58c229d877e801d7,
+        type: 3}
+      propertyPath: m_BrainParameters.VectorObservationSize
+      value: 246
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 84359146bf7af47e58c229d877e801d7, type: 3}
 --- !u!1001 &476292838
@@ -729,6 +749,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7819659174506835736, guid: 84359146bf7af47e58c229d877e801d7,
+        type: 3}
+      propertyPath: m_Model
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7819659174506835736, guid: 84359146bf7af47e58c229d877e801d7,
+        type: 3}
+      propertyPath: m_BrainParameters.VectorObservationSize
+      value: 246
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 84359146bf7af47e58c229d877e801d7, type: 3}
@@ -987,6 +1017,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7819659174506835736, guid: 84359146bf7af47e58c229d877e801d7,
+        type: 3}
+      propertyPath: m_Model
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7819659174506835736, guid: 84359146bf7af47e58c229d877e801d7,
+        type: 3}
+      propertyPath: m_BrainParameters.VectorObservationSize
+      value: 246
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 84359146bf7af47e58c229d877e801d7, type: 3}
 --- !u!850595691 &972736571
@@ -1238,6 +1278,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7819659174506835736, guid: 84359146bf7af47e58c229d877e801d7,
+        type: 3}
+      propertyPath: m_Model
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7819659174506835736, guid: 84359146bf7af47e58c229d877e801d7,
+        type: 3}
+      propertyPath: m_BrainParameters.VectorObservationSize
+      value: 246
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 84359146bf7af47e58c229d877e801d7, type: 3}
 --- !u!1001 &1071024415
@@ -1427,6 +1477,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7819659174506835736, guid: 84359146bf7af47e58c229d877e801d7,
+        type: 3}
+      propertyPath: m_Model
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7819659174506835736, guid: 84359146bf7af47e58c229d877e801d7,
+        type: 3}
+      propertyPath: m_BrainParameters.VectorObservationSize
+      value: 246
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 84359146bf7af47e58c229d877e801d7, type: 3}
 --- !u!1001 &1237883783
@@ -1495,6 +1555,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7819659174506835736, guid: 84359146bf7af47e58c229d877e801d7,
+        type: 3}
+      propertyPath: m_Model
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7819659174506835736, guid: 84359146bf7af47e58c229d877e801d7,
+        type: 3}
+      propertyPath: m_BrainParameters.VectorObservationSize
+      value: 246
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 84359146bf7af47e58c229d877e801d7, type: 3}
@@ -1783,6 +1853,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7819659174506835736, guid: 84359146bf7af47e58c229d877e801d7,
+        type: 3}
+      propertyPath: m_Model
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7819659174506835736, guid: 84359146bf7af47e58c229d877e801d7,
+        type: 3}
+      propertyPath: m_BrainParameters.VectorObservationSize
+      value: 246
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 84359146bf7af47e58c229d877e801d7, type: 3}
@@ -2141,6 +2221,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7819659174506835736, guid: 84359146bf7af47e58c229d877e801d7,
+        type: 3}
+      propertyPath: m_Model
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7819659174506835736, guid: 84359146bf7af47e58c229d877e801d7,
+        type: 3}
+      propertyPath: m_BrainParameters.VectorObservationSize
+      value: 246
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 84359146bf7af47e58c229d877e801d7, type: 3}
 --- !u!1001 &2709362470382547191
@@ -2212,8 +2302,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7819659174506835736, guid: 84359146bf7af47e58c229d877e801d7,
         type: 3}
+      propertyPath: m_Model
+      value: 
+      objectReference: {fileID: 5022602860645237092, guid: 0cac2a8a09c66da4483862c581b5552d,
+        type: 3}
+    - target: {fileID: 7819659174506835736, guid: 84359146bf7af47e58c229d877e801d7,
+        type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
-      value: 245
+      value: 246
+      objectReference: {fileID: 0}
+    - target: {fileID: 7819659174955737644, guid: 84359146bf7af47e58c229d877e801d7,
+        type: 3}
+      propertyPath: groundContactPenalty
+      value: -10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 84359146bf7af47e58c229d877e801d7, type: 3}
