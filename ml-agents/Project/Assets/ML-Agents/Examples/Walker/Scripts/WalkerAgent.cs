@@ -15,7 +15,6 @@ public class WalkerAgent : Agent
     private float stepLength;
     private float footTimer;
     private int leadingFoot;
-    Vector3 relativePosition;
 
     [Header("Walk Speed")]
     [Range(0.1f, 10)]
@@ -273,7 +272,11 @@ public class WalkerAgent : Agent
         }
 
         AddReward(matchSpeedReward * lookAtTargetReward);
+        RewardStep();
+    }
 
+    void RewardStep()
+    {
         // Update foot timer
         footTimer += Time.deltaTime;
 
@@ -284,86 +287,46 @@ public class WalkerAgent : Agent
         }
 
         Vector3 agentForward = transform.forward;
+        Vector3 relativePosition;
 
         if (leadingFoot == 0) // Left foot is leading
         {
             relativePosition = footR.position - footL.position;
-            stepLength = relativePosition.magnitude;
-            float dotProduct = Vector3.Dot(relativePosition, agentForward);
-            // Right foot is in front of left foot and it touches the ground
-            
-            if ((dotProduct > 0) && (m_JdController.bodyPartsDict[footL].groundContact.touchingGround)
-                && (m_JdController.bodyPartsDict[footR].groundContact.touchingGround) && (stepLength > 1.5f))
-            {
-                if (footTimer < 1f)
-                {
-                    AddReward(-0.1f);
-                }
-                else
-                {
-                    AddReward(0.1f);
-                }
-
-                footTimer = 0f;
-                leadingFoot = 1; // Change the leading foot to the right foot
-            }
         }
 
-        else if (leadingFoot == 1) // Right foot is leading
-        {
-            relativePosition = footL.position - footR.position;
-            stepLength = relativePosition.magnitude;
-            float dotProduct = Vector3.Dot(relativePosition, agentForward);
-
-            // Left foot is in front of right foot and it touches the ground
-            if ((dotProduct > 0) && (m_JdController.bodyPartsDict[footL].groundContact.touchingGround)
-                && (m_JdController.bodyPartsDict[footR].groundContact.touchingGround) && (stepLength > 1.5f))
-            {
-                if (footTimer < 1f)
-                {
-                    AddReward(-0.1f);
-                }
-                else
-                {
-                    AddReward(0.1f);
-                }
-
-                footTimer = 0f;
-                leadingFoot = 0; // Change the leading foot to the left foot
-            }
-        }
-
-        /*
-
-        // Update previous foot positions
-        previousFootLPosition = footL.position;
-        previousFootRPosition = footR.position;
-
-        var chestRotation = m_JdController.bodyPartsDict[chest].rb.rotation;
-        var rotationThreshold = Quaternion.Euler(30f, 30f, 30f); // Adjust the threshold to suit your needs
-
-        // Calculate the difference between the chest rotation and the hips rotation
-        var rotationDifference = Quaternion.Angle(chestRotation, hips.rotation);
-
-        bool isChestRotationUnstable = rotationDifference > 30f || rotationDifference < -30f;
-
-        if (isChestRotationUnstable)
-        {
-            // Apply penalty for losing balance based on chest rotation
-            AddReward(-0.5f);
-        }
         else
         {
-            AddReward(0.1f);
+            relativePosition = footL.position - footR.position;
         }
-        */
-    }
 
-    // Check if the foot is close to the ground
-    private bool IsGrounded(Vector3 footPosition)
-    {
-        float groundThreshold = 0.1f; // Adjust this threshold as needed
-        return footPosition.y <= groundThreshold;
+        stepLength = relativePosition.magnitude;
+        float dotProduct = Vector3.Dot(relativePosition, agentForward);
+
+        // Alternate foot
+        if ((dotProduct > 0) && (m_JdController.bodyPartsDict[footL].groundContact.touchingGround)
+            && (m_JdController.bodyPartsDict[footR].groundContact.touchingGround) && (stepLength > 0.75f) && (stepLength < 1.5f))
+        {
+            if (footTimer < 1f)
+            {
+                AddReward(-0.1f);
+            }
+            else
+            {
+                AddReward(0.1f);
+            }
+
+            footTimer = 0f;
+
+            if (leadingFoot == 0) // Left foot is leading
+            {
+                leadingFoot = 1;
+            }
+
+            else
+            {
+                leadingFoot = 0;
+            }
+        }
     }
 
     //Returns the average velocity of all of the body parts
@@ -402,6 +365,7 @@ public class WalkerAgent : Agent
     public void TouchedTarget()
     {
         AddReward(1f);
+        // footTimer = -2f; // Leave margin so he turns
     }
 
     public void SetTorsoMass()
