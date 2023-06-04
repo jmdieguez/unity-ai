@@ -2,59 +2,59 @@
     "SoccerTwos": {
         "checkpoints": [
             {
-                "steps": 2999976,
-                "file_path": "results\\Retrain\\SoccerTwos\\SoccerTwos-2999976.onnx",
-                "reward": null,
-                "creation_time": 1685557752.2729878,
+                "steps": 8999979,
+                "file_path": "results\\Retrain\\SoccerTwos\\SoccerTwos-8999979.onnx",
+                "reward": 14.684393457347348,
+                "creation_time": 1685572107.0284376,
                 "auxillary_file_paths": [
-                    "results\\Retrain\\SoccerTwos\\SoccerTwos-2999976.pt"
+                    "results\\Retrain\\SoccerTwos\\SoccerTwos-8999979.pt"
                 ]
             },
             {
-                "steps": 3499996,
-                "file_path": "results\\Retrain\\SoccerTwos\\SoccerTwos-3499996.onnx",
-                "reward": 36.83940112277081,
-                "creation_time": 1685558865.6353843,
+                "steps": 9499989,
+                "file_path": "results\\Retrain\\SoccerTwos\\SoccerTwos-9499989.onnx",
+                "reward": 9.390374422073364,
+                "creation_time": 1685573254.6197958,
                 "auxillary_file_paths": [
-                    "results\\Retrain\\SoccerTwos\\SoccerTwos-3499996.pt"
+                    "results\\Retrain\\SoccerTwos\\SoccerTwos-9499989.pt"
                 ]
             },
             {
-                "steps": 3999953,
-                "file_path": "results\\Retrain\\SoccerTwos\\SoccerTwos-3999953.onnx",
-                "reward": 12.753370462854702,
-                "creation_time": 1685560181.4449742,
+                "steps": 9999988,
+                "file_path": "results\\Retrain\\SoccerTwos\\SoccerTwos-9999988.onnx",
+                "reward": 27.93116400241852,
+                "creation_time": 1685574389.9075274,
                 "auxillary_file_paths": [
-                    "results\\Retrain\\SoccerTwos\\SoccerTwos-3999953.pt"
+                    "results\\Retrain\\SoccerTwos\\SoccerTwos-9999988.pt"
                 ]
             },
             {
-                "steps": 4499937,
-                "file_path": "results\\Retrain\\SoccerTwos\\SoccerTwos-4499937.onnx",
-                "reward": 41.32592261889402,
-                "creation_time": 1685561469.545801,
+                "steps": 10499943,
+                "file_path": "results\\Retrain\\SoccerTwos\\SoccerTwos-10499943.onnx",
+                "reward": -1.5636534071282338,
+                "creation_time": 1685575526.3118722,
                 "auxillary_file_paths": [
-                    "results\\Retrain\\SoccerTwos\\SoccerTwos-4499937.pt"
+                    "results\\Retrain\\SoccerTwos\\SoccerTwos-10499943.pt"
                 ]
             },
             {
-                "steps": 4691511,
-                "file_path": "results\\Retrain\\SoccerTwos\\SoccerTwos-4691511.onnx",
-                "reward": null,
-                "creation_time": 1685561909.6448882,
+                "steps": 10838841,
+                "file_path": "results\\Retrain\\SoccerTwos\\SoccerTwos-10838841.onnx",
+                "reward": -5.028700028856595,
+                "creation_time": 1685576412.6969151,
                 "auxillary_file_paths": [
-                    "results\\Retrain\\SoccerTwos\\SoccerTwos-4691511.pt"
+                    "results\\Retrain\\SoccerTwos\\SoccerTwos-10838841.pt"
                 ]
             }
         ],
-        "elo": 1234.1875888429443,
+        "elo": 1428.0097306531602,
         "final_checkpoint": {
-            "steps": 4691511,
+            "steps": 10838841,
             "file_path": "results\\Retrain\\SoccerTwos.onnx",
-            "reward": null,
-            "creation_time": 1685561909.6448882,
+            "reward": -5.028700028856595,
+            "creation_time": 1685576412.6969151,
             "auxillary_file_paths": [
-                "results\\Retrain\\SoccerTwos\\SoccerTwos-4691511.pt"
+                "results\\Retrain\\SoccerTwos\\SoccerTwos-10838841.pt"
             ]
         }
     },

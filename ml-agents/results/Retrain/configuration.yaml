@@ -33,7 +33,7 @@ behaviors:
           memory: null
           goal_conditioning_type: hyper
           deterministic: false
-    init_path: results\recompensasField2\SoccerTwos\checkpoint.pt
+    init_path: null
     keep_checkpoints: 5
     checkpoint_interval: 500000
     max_steps: 50000000
@@ -69,10 +69,10 @@ engine_settings:
 environment_parameters: null
 checkpoint_settings:
   run_id: Retrain
-  initialize_from: recompensasField2
+  initialize_from: null
   load_model: false
-  resume: false
-  force: true
+  resume: true
+  force: false
   train_model: false
   inference: false
   results_dir: results
