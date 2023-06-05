@@ -12,6 +12,7 @@ public class SoccerBallController : MonoBehaviour
     void Start()
     {
         envController = area.GetComponent<SoccerEnvController>();
+        lastTouch = null;
 
     }
 

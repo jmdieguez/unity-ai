@@ -96,8 +96,8 @@ public class AgentSoccer : Agent
         }
         if (position == Position.Goalie)
         {
-            m_LateralSpeed = 1.0f;
-            m_ForwardSpeed = 0.8f;
+            m_LateralSpeed = 0.75f;
+            m_ForwardSpeed = 0.5f;
         }
         else if (position == Position.Striker)
         {
@@ -169,7 +169,7 @@ public class AgentSoccer : Agent
     //Sirve para saber si esta dentro de su area
     void OnTriggerEnter(Collider other)
     {   
-         if (other.gameObject == field)
+         if (other.gameObject == this.field)
          {
             inField = true;
          }
@@ -177,7 +177,7 @@ public class AgentSoccer : Agent
     //Sirve para saber si esta fuera de su area
     void OnTriggerExit(Collider other)
     {   
-         if (other.gameObject == field)
+         if (other.gameObject == this.field)
          {
             inField = false;
          }
@@ -188,28 +188,31 @@ public class AgentSoccer : Agent
              if (!inField)
             {
                 // Aplica una penalización por salir del campo
-                AddReward(fieldPenalty * 1.2f );
+                AddReward(-1f);
+                //AddReward(fieldPenalty * 3.0f );
             }
             else{
-                AddReward(fieldReward*1.5f);
+                AddReward(0.5f);
             }
         }
     }
 
+
+
     public void makeGoal(){
         if((position != Position.Goalie)){ //Los arqueros deberian no hacer goles, su roll es quedarse en el arco
-                AddReward(4.5f); 
+                AddReward(0.8f); 
         }
         if((position == Position.Striker)){ //Los delanteros tienen un extra por hacer un gol
-                AddReward(0.5f); 
+                AddReward(0.2f); 
         }
     }
     public void makeOwnGoal(){
         if((position != Position.Goalie)){
-                AddReward(-5.5f);
+                AddReward(-1f);
         }
         else{
-            AddReward(-1.5f); //Un arquero no deberia ser tan penalizado por hacerlo en contra, se supone que quiso atajar
+            AddReward(-0.25f); //Un arquero no deberia ser tan penalizado por hacerlo en contra, se supone que quiso atajar
         }
     }
 
@@ -217,14 +220,13 @@ public class AgentSoccer : Agent
         if(!envController.isNearToBall(this)){ // El arquero no necesariamente tiene que estar cerca de la pelota, los defensores tampoco
 
             if((position == Position.Midfielder)){
-                AddReward(-0.5f);
-               
+                AddReward(-0.4f);
             }
             if(position == Position.Striker){
-                 AddReward(-0.35f);
+                 AddReward(-0.15f);
             }
             if(position == Position.Defender){
-                AddReward(-0.175f);
+                AddReward(-0.075f);
             }
         }
     }
@@ -234,15 +236,14 @@ public class AgentSoccer : Agent
         //Los arqueros no tiene bonus existencial, su bonus se basa en no salir del area
         if (position == Position.Goalie)
         {
-            // Existential bonus for Defenders.
-            AddReward(m_Existential/4);
+            AddReward(-m_Existential/16);
         }
-        if (position == Position.Defender)
+        else if (position == Position.Defender)
         {
             // Existential bonus for Defenders.
-            AddReward(m_Existential/8);
+            AddReward(-m_Existential/8);
         }
-        if (position == Position.Midfielder)
+        else if (position == Position.Midfielder)
         {
             // Existential bonus for Midfielders.
             AddReward(-m_Existential/4);
@@ -275,14 +276,14 @@ public class AgentSoccer : Agent
         if ((stepsWithoutTouchingBall >= 1950) && (position != Position.Goalie)) // Los arqueros no reciben esta penalizacion
         {   
             if(position == Position.Defender){
-                AddReward(-0.08f); // Aplica una penalización por falta de interacción con el balón
+                AddReward(-0.15f); // Aplica una penalización por falta de interacción con el balón
 
             }
             else{
-                AddReward(-0.5f); // Aplica una penalización por falta de interacción con el balón
+                AddReward(-0.75f); // Aplica una penalización por falta de interacción con el balón
             }
         }
-        if ((stepsWithoutTouchingBall < 500) && (position != Position.Goalie)) // Los arqueros no reciben esta compensacion
+        if ((stepsWithoutTouchingBall < 750) && (position != Position.Goalie)) // Los arqueros no reciben esta compensacion
         {   
             if(position == Position.Defender){
                 AddReward(0.15f);
@@ -295,9 +296,9 @@ public class AgentSoccer : Agent
 
 
     public void kickToEnemyGoal(Vector3 dir){
-        if (Vector3.Dot(dir, enemyGoal.transform.position - transform.position) > 0.85f)
+        if (Vector3.Dot(dir, enemyGoal.transform.position - transform.position) > 0.90f)
     {
-        AddReward(0.45f); // Recompensa por patear hacia el arco rival
+        AddReward(0.25f); // Recompensa por patear hacia el arco rival
     }
     else
     {
@@ -314,6 +315,7 @@ public class AgentSoccer : Agent
         if((c.gameObject.CompareTag("purpleAgent")) && (team == Team.Purple) ){
             AddReward(-0.25f ); // Que no se choquen entre compañeros
         }
+
         if(c.gameObject.CompareTag("wall")){
             AddReward(-0.5f ); // Que no hagan tiempo contra la pared
         }
@@ -330,19 +332,19 @@ public class AgentSoccer : Agent
                 force = k_Power;
                     if(!inField)
                     {
-                         AddReward(-5.0f); //Si el arquero toca el balon fuera de su area, se lo castiga (En realidad la penalizacion es el valor por tocar la pelota menos esto, por eso parece alta)
+                         AddReward(-1f); //Si el arquero toca el balon fuera de su area, se lo castiga (En realidad la penalizacion es el valor por tocar la pelota menos esto, por eso parece alta)
                     }
                     else{
-                        if(team != lastTouched.team)
+                        if(this.team != lastTouched.team)
                         {
-                            AddReward(2f);  // Si el arquero toca el balon cuando la habia tocado alguien del otro equipo se lo recompensa
+                            AddReward(1f);  // Si el arquero toca el balon cuando la habia tocado alguien del otro equipo se lo recompensa
                         }
                     }
                     
                 }
                 if(position == Position.Defender)
                 {
-                    if(team != lastTouched.team )
+                    if(this.team != lastTouched.team )
                     {
                         AddReward(0.75f);// Si el defensor toca el balon cuando la habia tocado alguien del otro equipo se lo recompensa
                     }
@@ -352,12 +354,12 @@ public class AgentSoccer : Agent
                 {
                     if(this == lastTouched )
                     {
-                        AddReward(1.2f);// Si el mediocampista Toca mas de una vez seguida la pelota se lo premia
+                        AddReward(0.5f);// Si el mediocampista Toca mas de una vez seguida la pelota se lo premia
                     }
                 }
-                if(lastTouched.team == team && (this != lastTouched)){
-                    lastTouched.AddReward(0.5f); // Recompensa por hacer un pase
-                    envController.succesfullPass(team);
+                if(lastTouched.team == this.team && (this != lastTouched)){
+                    lastTouched.AddReward(0.25f); // Recompensa por hacer un pase
+                    envController.succesfullPass(this.team);
 
                 }
             }
@@ -366,7 +368,7 @@ public class AgentSoccer : Agent
             }
 
 
-            AddReward(2.5f); //Recompensa por tomar contacto con el balon
+            AddReward(0.75f); //Recompensa por tomar contacto con el balon
             var dir = c.contacts[0].point - transform.position;
             dir = dir.normalized;
             if(position != Position.Goalie)

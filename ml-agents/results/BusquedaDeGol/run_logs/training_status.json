@@ -1,0 +1,48 @@
+{
+    "SoccerTwos": {
+        "checkpoints": [
+            {
+                "steps": 499966,
+                "file_path": "results\\BusquedaDeGol\\SoccerTwos\\SoccerTwos-499966.onnx",
+                "reward": 3.888383483886719,
+                "creation_time": 1685962265.8982873,
+                "auxillary_file_paths": [
+                    "results\\BusquedaDeGol\\SoccerTwos\\SoccerTwos-499966.pt"
+                ]
+            },
+            {
+                "steps": 999955,
+                "file_path": "results\\BusquedaDeGol\\SoccerTwos\\SoccerTwos-999955.onnx",
+                "reward": 131.15221999179232,
+                "creation_time": 1685963373.9913394,
+                "auxillary_file_paths": [
+                    "results\\BusquedaDeGol\\SoccerTwos\\SoccerTwos-999955.pt"
+                ]
+            },
+            {
+                "steps": 1360549,
+                "file_path": "results\\BusquedaDeGol\\SoccerTwos\\SoccerTwos-1360549.onnx",
+                "reward": null,
+                "creation_time": 1685966972.0745735,
+                "auxillary_file_paths": [
+                    "results\\BusquedaDeGol\\SoccerTwos\\SoccerTwos-1360549.pt"
+                ]
+            }
+        ],
+        "elo": 1247.6749220399151,
+        "final_checkpoint": {
+            "steps": 1360549,
+            "file_path": "results\\BusquedaDeGol\\SoccerTwos.onnx",
+            "reward": null,
+            "creation_time": 1685966972.0745735,
+            "auxillary_file_paths": [
+                "results\\BusquedaDeGol\\SoccerTwos\\SoccerTwos-1360549.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}

@@ -1,0 +1,66 @@
+{
+    "SoccerTwos": {
+        "checkpoints": [
+            {
+                "steps": 10999970,
+                "file_path": "results\\ExistencialArquero\\SoccerTwos\\SoccerTwos-10999970.onnx",
+                "reward": 58.62239742473784,
+                "creation_time": 1685915103.3632407,
+                "auxillary_file_paths": [
+                    "results\\ExistencialArquero\\SoccerTwos\\SoccerTwos-10999970.pt"
+                ]
+            },
+            {
+                "steps": 11499983,
+                "file_path": "results\\ExistencialArquero\\SoccerTwos\\SoccerTwos-11499983.onnx",
+                "reward": 111.94482760131359,
+                "creation_time": 1685916264.9113426,
+                "auxillary_file_paths": [
+                    "results\\ExistencialArquero\\SoccerTwos\\SoccerTwos-11499983.pt"
+                ]
+            },
+            {
+                "steps": 11999943,
+                "file_path": "results\\ExistencialArquero\\SoccerTwos\\SoccerTwos-11999943.onnx",
+                "reward": null,
+                "creation_time": 1685917448.5552688,
+                "auxillary_file_paths": [
+                    "results\\ExistencialArquero\\SoccerTwos\\SoccerTwos-11999943.pt"
+                ]
+            },
+            {
+                "steps": 12499940,
+                "file_path": "results\\ExistencialArquero\\SoccerTwos\\SoccerTwos-12499940.onnx",
+                "reward": null,
+                "creation_time": 1685918624.5888722,
+                "auxillary_file_paths": [
+                    "results\\ExistencialArquero\\SoccerTwos\\SoccerTwos-12499940.pt"
+                ]
+            },
+            {
+                "steps": 12785600,
+                "file_path": "results\\ExistencialArquero\\SoccerTwos\\SoccerTwos-12785600.onnx",
+                "reward": 127.62449336903435,
+                "creation_time": 1685919421.2167416,
+                "auxillary_file_paths": [
+                    "results\\ExistencialArquero\\SoccerTwos\\SoccerTwos-12785600.pt"
+                ]
+            }
+        ],
+        "elo": 1244.3007719336351,
+        "final_checkpoint": {
+            "steps": 12785600,
+            "file_path": "results\\ExistencialArquero\\SoccerTwos.onnx",
+            "reward": 127.62449336903435,
+            "creation_time": 1685919421.2167416,
+            "auxillary_file_paths": [
+                "results\\ExistencialArquero\\SoccerTwos\\SoccerTwos-12785600.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}

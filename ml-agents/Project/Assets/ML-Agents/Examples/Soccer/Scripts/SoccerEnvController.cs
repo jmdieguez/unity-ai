@@ -103,7 +103,7 @@ public class SoccerEnvController : MonoBehaviour
     {
         if (scoredTeam == Team.Blue) //Si el equipo azul hace gol, se favorece al equipo y se le saca recompensa al rival
         {
-            m_BlueAgentGroup.AddGroupReward(2 - (float)m_ResetTimer / MaxEnvironmentSteps);
+            m_BlueAgentGroup.AddGroupReward(1 - (float)m_ResetTimer / MaxEnvironmentSteps);
             m_PurpleAgentGroup.AddGroupReward(-1);
             if(agentScorer.team == Team.Blue){
                 agentScorer.makeGoal(); // Se recompensa al agente que hizo el gol si es del equipo azul
@@ -117,7 +117,7 @@ public class SoccerEnvController : MonoBehaviour
         }
         else
         {
-            m_PurpleAgentGroup.AddGroupReward(2 - (float)m_ResetTimer / MaxEnvironmentSteps);
+            m_PurpleAgentGroup.AddGroupReward(1 - (float)m_ResetTimer / MaxEnvironmentSteps);
             m_BlueAgentGroup.AddGroupReward(-1);
             if(agentScorer.team == Team.Purple){
                 agentScorer.makeGoal(); // Se recompensa al agente que hizo el gol si es del equipo violeta
@@ -136,14 +136,14 @@ public class SoccerEnvController : MonoBehaviour
     }
     public bool isNearToBall(Agent agent){
         float distanceToTarget = Vector3.Distance(agent.transform.position, ball.transform.position);
-        return (distanceToTarget < 10.5f);
+        return (distanceToTarget < 4.5f);
     }
     public void succesfullPass(Team team){
         if(team ==Team.Blue){
-            m_BlueAgentGroup.AddGroupReward(0.25f);
+            m_BlueAgentGroup.AddGroupReward(0.15f);
         }
         else{
-            m_PurpleAgentGroup.AddGroupReward(0.25f);
+            m_PurpleAgentGroup.AddGroupReward(0.15f);
         }
     }
     public void ResetScene()
