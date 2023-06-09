@@ -19,12 +19,14 @@ public class SoccerBallController : MonoBehaviour
     {
         if (col.gameObject.CompareTag(purpleGoalTag)) //ball touched purple goal
         {
-            envController.GoalTouched(Team.Blue, lastTouch);
+            var ultAgent = lastTouch;
+            envController.GoalTouched(Team.Blue, ultAgent);
             //reseting();
         }
         if (col.gameObject.CompareTag(blueGoalTag)) //ball touched blue goal
         {
-            envController.GoalTouched(Team.Purple, lastTouch);
+            var ultAgent = lastTouch;
+            envController.GoalTouched(Team.Purple, ultAgent);
             //reseting();
         }
     }
@@ -32,15 +34,6 @@ public class SoccerBallController : MonoBehaviour
         lastTouch = null;
     }
     public void touchedBy(AgentSoccer agentLastTouch){
-        if(!lastTouch){
-            Debug.Log("No toca nadie previamente");
-        }
-        else{
-             Debug.Log("Toco Previamente: " + lastTouch.team + " " + lastTouch.position);
-        }
         lastTouch = agentLastTouch;
-
-        Debug.Log("Toco Despues: " + lastTouch.team + " " + lastTouch.position);
-
     }
 }

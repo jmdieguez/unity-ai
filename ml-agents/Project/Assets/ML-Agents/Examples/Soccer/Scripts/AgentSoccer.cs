@@ -219,8 +219,9 @@ public class AgentSoccer : Agent
         sensor.AddObservation(stepsWithoutTouchingBall);
         // Direction is facing (1 Vector3 = 3 values)
         sensor.AddObservation(transform.forward);
+        //sensor.AddObservation(hasTouchedBall);
 
-        // 1 + 1 + 1 +  3  = 6 total values
+        // 1 + 1 + 1 +  3  + 1  = 7 total values
     }
 
 
@@ -313,12 +314,12 @@ public class AgentSoccer : Agent
         if ((stepsWithoutTouchingBall <= 1750) && (position != Position.Goalie)) // Los arqueros no reciben esta bonificacion
         {   
             if(position == Position.Defender){
-                AddReward(0.10f); // Aplica una Recompensa por interacción con el balón
+                AddReward(0.005f); // Aplica una Recompensa por interacción con el balón
 
 
             }
             else{
-                AddReward(0.20f); // Aplica una Recompensa por interacción con el balón
+                AddReward(0.01f); // Aplica una Recompensa por interacción con el balón
             }
             //Debug.Log("RECOMPENSA tocar el balon hace poco");
         }
@@ -358,11 +359,25 @@ public class AgentSoccer : Agent
             AddReward(-0.3f ); // Que no hagan tiempo contra la pared
             //Debug.Log("PENALIZACION chocar con pared");
         }
-    
-        var force = k_Power * m_KickPower;
+
+        if(this.position == Position.Defender){
+            var dir = c.contacts[0].point - transform.position;
+            dir = dir.normalized;
+            var force = 50000f;
+            
+            if((c.gameObject.CompareTag("blueAgent") && team == Team.Purple) || 
+                (c.gameObject.CompareTag("purpleAgent") && team == Team.Blue ) ){
+                    AddReward(0.05f); 
+                    c.gameObject.GetComponent<Rigidbody>().AddForce(dir * force);
+                    c.gameObject.GetComponent<AgentSoccer>().AddReward(-0.75f);
+
+            }
+        }
+       
         if (c.gameObject.CompareTag("ball"))
         {
-           hasTouchedBall = true;
+            var force = k_Power * m_KickPower;
+            hasTouchedBall = true;
             var lastTouched = c.gameObject.GetComponent<SoccerBallController>().lastTouch;
             /* if(lastTouched)
             {

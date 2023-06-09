@@ -108,13 +108,6 @@ public class SoccerEnvController : MonoBehaviour
 
     public void GoalTouched(Team scoredTeam, AgentSoccer agentScorer)
     {
-    if(!agentScorer){
-         Debug.Log("No llega agente que hace el gol");
-    }
-    else{
-         Debug.Log("Agente que hizo el gol " + agentScorer.team + " " + agentScorer.position);
-    }
-    
         if (scoredTeam == Team.Blue) //Si el equipo azul hace gol, se favorece al equipo y se le saca recompensa al rival
         {
             m_BlueAgentGroup.AddGroupReward(1 - (float)m_ResetTimer / MaxEnvironmentSteps);
