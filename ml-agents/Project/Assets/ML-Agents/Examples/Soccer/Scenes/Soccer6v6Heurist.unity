@@ -804,7 +804,7 @@ PrefabInstance:
     - target: {fileID: 3075393608446167876, guid: 002c89bccac3f3a4f977f1eb0be5b8eb,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5
+      value: 17.31
       objectReference: {fileID: 0}
     - target: {fileID: 3078550327278612134, guid: 002c89bccac3f3a4f977f1eb0be5b8eb,
         type: 3}
@@ -949,6 +949,11 @@ PrefabInstance:
       propertyPath: m_BehaviorType
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6882579646906156691, guid: 002c89bccac3f3a4f977f1eb0be5b8eb,
+        type: 3}
+      propertyPath: m_BrainParameters.VectorObservationSize
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 6924952869506631347, guid: 002c89bccac3f3a4f977f1eb0be5b8eb,
         type: 3}
       propertyPath: ball
@@ -1010,6 +1015,11 @@ PrefabInstance:
       propertyPath: ball
       value: 
       objectReference: {fileID: 65443758}
+    - target: {fileID: 8581100474920871019, guid: 002c89bccac3f3a4f977f1eb0be5b8eb,
+        type: 3}
+      propertyPath: position
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8581100474920871019, guid: 002c89bccac3f3a4f977f1eb0be5b8eb,
         type: 3}
       propertyPath: enemyGoal
