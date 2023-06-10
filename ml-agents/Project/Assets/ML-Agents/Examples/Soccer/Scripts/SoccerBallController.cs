@@ -17,23 +17,25 @@ public class SoccerBallController : MonoBehaviour
     }
     void OnCollisionEnter(Collision col)
     {
+        if(col.gameObject.CompareTag("blueAgent") || col.gameObject.CompareTag("purpleAgent")){
+            AgentSoccer agente = col.gameObject.GetComponent<AgentSoccer>();
+            if(agente != lastTouch){
+                lastTouch = agente;
+            }
+        }
         if (col.gameObject.CompareTag(purpleGoalTag)) //ball touched purple goal
         {
-            var ultAgent = lastTouch;
-            envController.GoalTouched(Team.Blue, ultAgent);
-            //reseting();
+            envController.GoalTouched(Team.Blue, lastTouch);
         }
         if (col.gameObject.CompareTag(blueGoalTag)) //ball touched blue goal
         {
-            var ultAgent = lastTouch;
-            envController.GoalTouched(Team.Purple, ultAgent);
-            //reseting();
+            envController.GoalTouched(Team.Purple, lastTouch);
         }
     }
     public void reseting(){
         lastTouch = null;
     }
     public void touchedBy(AgentSoccer agentLastTouch){
-        lastTouch = agentLastTouch;
+        //lastTouch = agentLastTouch;
     }
 }
