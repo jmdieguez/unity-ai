@@ -151,7 +151,7 @@ public class SoccerEnvController : MonoBehaviour
     }
     public bool isNearToBall(Agent agent){
         float distanceToTarget = Vector3.Distance(agent.transform.position, ball.transform.position);
-        return (distanceToTarget < 5.0f);
+        return (distanceToTarget < 7.0f);
     }
     public void succesfullPass(Team team){
         if(team ==Team.Blue){
