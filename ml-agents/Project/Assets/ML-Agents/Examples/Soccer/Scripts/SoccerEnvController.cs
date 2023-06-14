@@ -153,14 +153,7 @@ public class SoccerEnvController : MonoBehaviour
         float distanceToTarget = Vector3.Distance(agent.transform.position, ball.transform.position);
         return (distanceToTarget < 7.0f);
     }
-    public void succesfullPass(Team team){
-        if(team ==Team.Blue){
-            m_BlueAgentGroup.AddGroupReward(0.15f);
-        }
-        else{
-            m_PurpleAgentGroup.AddGroupReward(0.15f);
-        }
-    }
+
     public void ResetScene()
     {
         m_ResetTimer = 0;

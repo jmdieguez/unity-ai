@@ -1,0 +1,57 @@
+{
+    "SoccerTwos": {
+        "checkpoints": [
+            {
+                "steps": 7499936,
+                "file_path": "results\\AjusteParametros\\SoccerTwos\\SoccerTwos-7499936.onnx",
+                "reward": 21.018260553479195,
+                "creation_time": 1686593725.5242627,
+                "auxillary_file_paths": [
+                    "results\\AjusteParametros\\SoccerTwos\\SoccerTwos-7499936.pt"
+                ]
+            },
+            {
+                "steps": 7999960,
+                "file_path": "results\\AjusteParametros\\SoccerTwos\\SoccerTwos-7999960.onnx",
+                "reward": 1.837714237826211,
+                "creation_time": 1686594924.1838505,
+                "auxillary_file_paths": [
+                    "results\\AjusteParametros\\SoccerTwos\\SoccerTwos-7999960.pt"
+                ]
+            },
+            {
+                "steps": 8499956,
+                "file_path": "results\\AjusteParametros\\SoccerTwos\\SoccerTwos-8499956.onnx",
+                "reward": 23.166200856367748,
+                "creation_time": 1686596099.0721061,
+                "auxillary_file_paths": [
+                    "results\\AjusteParametros\\SoccerTwos\\SoccerTwos-8499956.pt"
+                ]
+            },
+            {
+                "steps": 8999972,
+                "file_path": "results\\AjusteParametros\\SoccerTwos\\SoccerTwos-8999972.onnx",
+                "reward": 0.6158753362035861,
+                "creation_time": 1686597269.0218444,
+                "auxillary_file_paths": [
+                    "results\\AjusteParametros\\SoccerTwos\\SoccerTwos-8999972.pt"
+                ]
+            },
+            {
+                "steps": 9499982,
+                "file_path": "results\\AjusteParametros\\SoccerTwos\\SoccerTwos-9499982.onnx",
+                "reward": -7.815749451518059,
+                "creation_time": 1686598442.9819474,
+                "auxillary_file_paths": [
+                    "results\\AjusteParametros\\SoccerTwos\\SoccerTwos-9499982.pt"
+                ]
+            }
+        ],
+        "elo": 1029.1717060835133
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}

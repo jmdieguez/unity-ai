@@ -1,0 +1,66 @@
+{
+    "SoccerTwos": {
+        "checkpoints": [
+            {
+                "steps": 4499968,
+                "file_path": "results\\KickGoal\\SoccerTwos\\SoccerTwos-4499968.onnx",
+                "reward": 2.6929999192555747,
+                "creation_time": 1686676419.182439,
+                "auxillary_file_paths": [
+                    "results\\KickGoal\\SoccerTwos\\SoccerTwos-4499968.pt"
+                ]
+            },
+            {
+                "steps": 4999992,
+                "file_path": "results\\KickGoal\\SoccerTwos\\SoccerTwos-4999992.onnx",
+                "reward": 5.468648479036663,
+                "creation_time": 1686677617.9664552,
+                "auxillary_file_paths": [
+                    "results\\KickGoal\\SoccerTwos\\SoccerTwos-4999992.pt"
+                ]
+            },
+            {
+                "steps": 5499936,
+                "file_path": "results\\KickGoal\\SoccerTwos\\SoccerTwos-5499936.onnx",
+                "reward": 4.357164079944293,
+                "creation_time": 1686678762.7097092,
+                "auxillary_file_paths": [
+                    "results\\KickGoal\\SoccerTwos\\SoccerTwos-5499936.pt"
+                ]
+            },
+            {
+                "steps": 5999976,
+                "file_path": "results\\KickGoal\\SoccerTwos\\SoccerTwos-5999976.onnx",
+                "reward": 10.492671471834182,
+                "creation_time": 1686680359.1739063,
+                "auxillary_file_paths": [
+                    "results\\KickGoal\\SoccerTwos\\SoccerTwos-5999976.pt"
+                ]
+            },
+            {
+                "steps": 6051870,
+                "file_path": "results\\KickGoal\\SoccerTwos\\SoccerTwos-6051870.onnx",
+                "reward": null,
+                "creation_time": 1686680535.0399227,
+                "auxillary_file_paths": [
+                    "results\\KickGoal\\SoccerTwos\\SoccerTwos-6051870.pt"
+                ]
+            }
+        ],
+        "elo": 1106.462782535047,
+        "final_checkpoint": {
+            "steps": 6051870,
+            "file_path": "results\\KickGoal\\SoccerTwos.onnx",
+            "reward": null,
+            "creation_time": 1686680535.0399227,
+            "auxillary_file_paths": [
+                "results\\KickGoal\\SoccerTwos\\SoccerTwos-6051870.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}
