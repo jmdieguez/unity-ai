@@ -124,7 +124,7 @@ public class SoccerEnvController : MonoBehaviour
                 }
             }
             
-            //goalsBlue.Goal(); // Para entrenar esta linea debe de comentarse
+            goalsBlue.Goal(); // Para entrenar esta linea debe de comentarse
         }
         if(scoredTeam == Team.Purple)
         {
@@ -142,7 +142,7 @@ public class SoccerEnvController : MonoBehaviour
                 }
             }
 
-            //goalsPurple.Goal(); // Para entrenar esta linea debe de comentarse
+            goalsPurple.Goal(); // Para entrenar esta linea debe de comentarse
         }
         m_PurpleAgentGroup.EndGroupEpisode();
         m_BlueAgentGroup.EndGroupEpisode();
@@ -151,7 +151,7 @@ public class SoccerEnvController : MonoBehaviour
     }
     public bool isNearToBall(Agent agent){
         float distanceToTarget = Vector3.Distance(agent.transform.position, ball.transform.position);
-        return (distanceToTarget < 7.0f);
+        return (distanceToTarget < 10.0f);
     }
 
     public void ResetScene()

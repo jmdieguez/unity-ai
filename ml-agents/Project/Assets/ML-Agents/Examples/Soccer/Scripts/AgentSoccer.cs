@@ -231,7 +231,7 @@ public class AgentSoccer : Agent
 
     public void makeGoal(){
         if((position != Position.Goalie)){ //Los arqueros deberian no hacer goles, su roll es quedarse en el arco
-                AddReward(0.9f); 
+                AddReward(0.8f); 
                 //Debug.Log("RECOMPENSA hacer gol");
         }
         if((position == Position.Striker)){ //Los delanteros tienen un extra por hacer un gol
@@ -252,9 +252,9 @@ public class AgentSoccer : Agent
 
     public void nearToBall(){
         if(position != Position.Goalie){
-
+            
             if(envController.isNearToBall(this)){ // El arquero no necesariamente tiene que estar cerca de la pelota, los defensores tampoco
-
+                /*
                 if((position == Position.Midfielder)){
                     AddReward(0.3f);
                 }
@@ -265,6 +265,7 @@ public class AgentSoccer : Agent
                     AddReward(0.095f);
                 }
                 //Debug.Log("RECOMPENSA estar cerca del balon");
+            */
             }
             else{
                 if(position == Position.Defender){
@@ -332,7 +333,7 @@ public class AgentSoccer : Agent
     public void kickToEnemyGoal(Vector3 dir){
         if (Vector3.Dot(dir, enemyGoal.transform.position - transform.position) > 0.9f)
     {
-        AddReward(0.1f); // Recompensa por patear hacia el arco rival
+        AddReward(0.2f); // Recompensa por patear hacia el arco rival
         //Debug.Log("RECOMPENSA patear arco rival");
         if(position == Position.Striker){
             AddReward(0.30f);
@@ -394,7 +395,7 @@ public class AgentSoccer : Agent
                             AddReward(0.8f);  // Si el arquero toca el balon cuando la habia tocado alguien del otro equipo se lo recompensa
                         }
                         else{
-                            AddReward(0.2f);
+                            AddReward(0.2f);    //El arquero solo obtiene recompensa por tocar el balon cuando esta dentro de su area
                         }
                     }
                     
@@ -404,7 +405,7 @@ public class AgentSoccer : Agent
                 {
                     if(this.team != lastTouched.team )
                     {
-                        AddReward(0.5f);// Si el defensor toca el balon cuando la habia tocado alguien del otro equipo se lo recompensa
+                        AddReward(0.15f);// Si el defensor toca el balon cuando la habia tocado alguien del otro equipo se lo recompensa
                     }
                 }
                 
@@ -412,7 +413,7 @@ public class AgentSoccer : Agent
                 {
                     if(this == lastTouched )
                     {
-                        AddReward(0.5f);// Si el mediocampista Toca mas de una vez seguida la pelota se lo premia
+                        AddReward(0.15f);// Si el mediocampista Toca mas de una vez seguida la pelota se lo premia
                     }
                 }
                 if(lastTouched.team == this.team && (this != lastTouched)){
@@ -432,7 +433,7 @@ public class AgentSoccer : Agent
             if(position != Position.Goalie)
             {
                 kickToEnemyGoal(dir);
-                AddReward(0.35f); //Recompensa por tomar contacto con el balon
+                AddReward(0.55f); //Recompensa por tomar contacto con el balon
                 //Debug.Log("RECOMPENSA tocar balon");
             }
             c.gameObject.GetComponent<Rigidbody>().AddForce(dir * force);
