@@ -166,7 +166,7 @@ MonoBehaviour:
   agent: {fileID: 0}
   agentDoneOnGroundContact: 1
   penalizeGroundContact: 1
-  groundContactPenalty: -1
+  groundContactPenalty: -100
   touchingGround: 0
 --- !u!1 &895268871289741235
 GameObject:
@@ -304,7 +304,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 246
+    VectorObservationSize: 247
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 39
@@ -313,7 +313,7 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 0}
+  m_Model: {fileID: 5022602860645237092, guid: 1b794f127f2a66a4382c6588ed6196a9, type: 3}
   m_InferenceDevice: 2
   m_BehaviorType: 0
   m_BehaviorName: WalkerDynamic

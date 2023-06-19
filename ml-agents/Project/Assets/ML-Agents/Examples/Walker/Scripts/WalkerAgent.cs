@@ -15,6 +15,7 @@ public class WalkerAgent : Agent
     private float stepLength;
     private float footTimer;
     private int leadingFoot;
+    private bool changingDirection = false;
 
     [Header("Walk Speed")]
     [Range(0.1f, 10)]
@@ -122,8 +123,9 @@ public class WalkerAgent : Agent
         previousFootLPosition = footL.position;
         previousFootRPosition = footR.position;
 
-        footTimer = -2.0f;
+        footTimer = 0f;
         leadingFoot = UnityEngine.Random.Range(0, 2); // Randomly choose 0 or 1 (left or right foot)
+        changingDirection = true;
     }
 
     /// <summary>
@@ -183,6 +185,7 @@ public class WalkerAgent : Agent
         sensor.AddObservation(leadingFoot);
         sensor.AddObservation(footTimer);
         sensor.AddObservation(stepLength);
+        sensor.AddObservation(changingDirection);
     }
 
     public override void OnActionReceived(ActionBuffers actionBuffers)
@@ -280,10 +283,15 @@ public class WalkerAgent : Agent
         // Update foot timer
         footTimer += Time.deltaTime;
 
-        if (footTimer > 2.0f)
+        if (footTimer > 2f)
         {
             // Penalize if the leading foot remains in front for 2 seconds
             AddReward(-1f);
+        }
+
+        else if (footTimer >= 0f)
+        {
+            changingDirection = false;
         }
 
         Vector3 agentForward = transform.forward;
@@ -302,30 +310,42 @@ public class WalkerAgent : Agent
         stepLength = relativePosition.magnitude;
         float dotProduct = Vector3.Dot(relativePosition, agentForward);
 
-        // Alternate foot
-        if ((dotProduct > 0) && (m_JdController.bodyPartsDict[footL].groundContact.touchingGround)
-            && (m_JdController.bodyPartsDict[footR].groundContact.touchingGround) && (stepLength > 0.75f) && (stepLength < 1.5f))
+        bool goodStepLength = (stepLength > 0.5) && (stepLength < 1.25f);
+
+        if (!changingDirection)
         {
-            if (footTimer < 1f)
+            // Alternate foot
+            if ((dotProduct > 0) && (m_JdController.bodyPartsDict[footL].groundContact.touchingGround)
+                && (m_JdController.bodyPartsDict[footR].groundContact.touchingGround) && goodStepLength)
             {
-                AddReward(-0.1f);
-            }
-            else
-            {
-                AddReward(0.1f);
-            }
+                {
+                    if ((footTimer < 1f))
+                    {
+                        AddReward(-0.01f);
+                    }
+                    else
+                    {
+                        AddReward(0.01f);
+                    }
 
-            footTimer = 0f;
+                    footTimer = 0f;
 
-            if (leadingFoot == 0) // Left foot is leading
-            {
-                leadingFoot = 1;
-            }
+                    if (leadingFoot == 0) // Left foot is leading
+                    {
+                        leadingFoot = 1;
+                    }
 
-            else
-            {
-                leadingFoot = 0;
+                    else
+                    {
+                        leadingFoot = 0;
+                    }
+                }
             }
+        }
+        else
+        {
+            // Step while changing direction
+            AddReward(-0.01f);
         }
     }
 
@@ -365,7 +385,8 @@ public class WalkerAgent : Agent
     public void TouchedTarget()
     {
         AddReward(1f);
-        // footTimer = -2f; // Leave margin so he turns
+        footTimer = -1f; // Leave margin so he turns
+        changingDirection = true;
     }
 
     public void SetTorsoMass()

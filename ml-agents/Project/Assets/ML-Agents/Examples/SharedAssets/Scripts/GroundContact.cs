@@ -37,6 +37,12 @@ namespace Unity.MLAgentsExamples
                     agent.EndEpisode();
                 }
             }
+
+            else if (col.transform.CompareTag("target"))
+            {
+                GetComponentInParent<WalkerAgent>().TouchedTarget();
+                // Debug.Log("toco target");
+            }
         }
 
         /// <summary>
