@@ -5,8 +5,7 @@ using Unity.MLAgents.Policies;
 using Unity.MLAgents.Extensions;
 using Unity.MLAgents.Sensors;
 using Unity.MLAgents.Sensors.Reflection;
-using System.Collections.Generic;
-using System.Linq;
+
 public enum Team
 {
     Blue = 0,
@@ -15,9 +14,13 @@ public enum Team
 
 public class AgentSoccer : Agent
 {
-    float m_KickPower;
-    // The coefficient for the reward for colliding with a ball. Set using curriculum.
-    float m_BallTouch;
+    // Note that that the detectable tags are different for the blue and purple teams. The order is
+    // * ball
+    // * own goal
+    // * opposing goal
+    // * wall
+    // * own teammate
+    // * opposing player
 
     // Add a new field to hold the reward for staying in the field
     public float fieldReward;
@@ -33,34 +36,15 @@ public class AgentSoccer : Agent
         Defender,
         Midfielder
     }
-    public GameObject field;
 
+    [HideInInspector]
+    public Team team;
+    float m_KickPower;
+    // The coefficient for the reward for colliding with a ball. Set using curriculum.
+    float m_BallTouch;
+    
+    [Observable]
     public Position position;
-    // Define the visual sensor component and its parameters
-    public RayPerceptionSensorComponent3D rayPerceptionSensor;
-
-    // Note that that the detectable tags are different for the blue and purple teams. The order is
-    // * ball
-    // * own goal
-    // * opposing goal
-    // * wall
-    // * own teammate
-    // * opposing player
-
-    // Define the team tags
-    // Team 1 tags
-    public List<string> blueTags = new List<string> { "ball", "blueGoal", "purpleGoal", "wall", "blueAgent", "purpleAgent" };
-    // Team 2 tags
-    public List<string> purpleTags = new List<string> { "ball", "purpleGoal", "blueGoal", "wall", "purpleAgent", "blueAgent" };
-
-    private Dictionary<string, int> tagToIntMap = new Dictionary<string, int>() {
-        { "ball", 0 },
-        { "blueGoal", 1 },
-        { "purpleGoal", 2 },
-        { "wall", 3 },
-        { "blueAgent", 4 },
-        { "purpleAgent", 5 }
-    };
 
     const float k_Power = 2000f;
     float m_Existential;
@@ -75,6 +59,7 @@ public class AgentSoccer : Agent
 
     [HideInInspector]
     public Rigidbody agentRb;
+    public GameObject field;
     SoccerSettings m_SoccerSettings;
     BehaviorParameters m_BehaviorParameters;
     public Vector3 initialPos;
@@ -133,9 +118,6 @@ public class AgentSoccer : Agent
         m_SoccerSettings = FindObjectOfType<SoccerSettings>();
         agentRb = GetComponent<Rigidbody>();
         agentRb.maxAngularVelocity = 500;
-
-        // Get the RayPerceptionSensor component
-        rayPerceptionSensor = GetComponent<RayPerceptionSensorComponent3D>();
 
         m_ResetParams = Academy.Instance.EnvironmentParameters;
     }
@@ -359,7 +341,7 @@ public class AgentSoccer : Agent
     }
     else
     {
-        AddReward(-0.4f); // Penalizaci�n por patear en direcci�n opuesta al arco rival
+        AddReward(-0.4f); // Penalización por patear en dirección opuesta al arco rival
         //Debug.Log("PENALIZACION patear a propio arco");
     }
     }
@@ -368,8 +350,8 @@ public class AgentSoccer : Agent
     {   
     
         if((c.gameObject.CompareTag("blueAgent")) && (team == Team.Blue) || (c.gameObject.CompareTag("purpleAgent")) && (team == Team.Purple)){
-            AddReward(-0.4f ); // Que no se choquen entre compa�eros
-            //Debug.Log("PENALIZACION chocar con compa�ero");
+            AddReward(-0.4f ); // Que no se choquen entre compañeros
+            //Debug.Log("PENALIZACION chocar con compañero");
             var dir = c.contacts[0].point - transform.position;
             dir = dir.normalized;
             var force = 30000f;
@@ -494,30 +476,6 @@ public class AgentSoccer : Agent
         {
             discreteActionsOut[1] = 2;
         }
-    }
-
-    /// <summary>
-    /// Used to provide a "kick" to the ball.
-    /// </summary>
-    void OnCollisionEnter(Collision c)
-    {
-        var force = k_Power * m_KickPower;
-        if (position == Position.Goalie)
-        {
-            force = k_Power;
-        }
-        if (c.gameObject.CompareTag("ball"))
-        {
-            AddReward(.2f * m_BallTouch);
-            var dir = c.contacts[0].point - transform.position;
-            dir = dir.normalized;
-            c.gameObject.GetComponent<Rigidbody>().AddForce(dir * force);
-        }
-    }
-
-    public override void OnEpisodeBegin()
-    {
-        m_BallTouch = m_ResetParams.GetWithDefault("ball_touch", 0);
     }
 
 }

@@ -2361,25 +2361,12 @@ MonoBehaviour:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
   MaxStep: 0
+  fieldReward: 0.01
+  fieldPenalty: -0.01
   team: 1
-  field: {fileID: 0}
   position: 2
-  rayPerceptionSensor: {fileID: 0}
-  blueTags:
-  - ball
-  - blueGoal
-  - purpleGoal
-  - wall
-  - blueAgent
-  - purpleAgent
-  purpleTags:
-  - ball
-  - purpleGoal
-  - blueGoal
-  - wall
-  - purpleAgent
-  - blueAgent
   agentRb: {fileID: 0}
+  field: {fileID: 0}
   initialPos: {x: 0, y: 0, z: 0}
   rotSign: 0
 --- !u!114 &1412771152918369071
@@ -3019,25 +3006,12 @@ MonoBehaviour:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
   MaxStep: 0
+  fieldReward: 0.01
+  fieldPenalty: -0.01
   team: 0
-  field: {fileID: 0}
   position: 2
-  rayPerceptionSensor: {fileID: 0}
-  blueTags:
-  - ball
-  - blueGoal
-  - purpleGoal
-  - wall
-  - blueAgent
-  - purpleAgent
-  purpleTags:
-  - ball
-  - purpleGoal
-  - blueGoal
-  - wall
-  - purpleAgent
-  - blueAgent
   agentRb: {fileID: 0}
+  field: {fileID: 0}
   initialPos: {x: 0, y: 0, z: 0}
   rotSign: 0
 --- !u!114 &4397212468198412741
@@ -3501,25 +3475,12 @@ MonoBehaviour:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
   MaxStep: 0
+  fieldReward: 0.01
+  fieldPenalty: -0.01
   team: 0
-  field: {fileID: 0}
   position: 2
-  rayPerceptionSensor: {fileID: 0}
-  blueTags:
-  - ball
-  - blueGoal
-  - purpleGoal
-  - wall
-  - blueAgent
-  - purpleAgent
-  purpleTags:
-  - ball
-  - purpleGoal
-  - blueGoal
-  - wall
-  - purpleAgent
-  - blueAgent
   agentRb: {fileID: 0}
+  field: {fileID: 0}
   initialPos: {x: 0, y: 0, z: 0}
   rotSign: 0
 --- !u!114 &2035772164188706775
@@ -3943,25 +3904,12 @@ MonoBehaviour:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
   MaxStep: 0
+  fieldReward: 0.01
+  fieldPenalty: -0.01
   team: 1
-  field: {fileID: 0}
   position: 2
-  rayPerceptionSensor: {fileID: 0}
-  blueTags:
-  - ball
-  - blueGoal
-  - purpleGoal
-  - wall
-  - blueAgent
-  - purpleAgent
-  purpleTags:
-  - ball
-  - purpleGoal
-  - blueGoal
-  - wall
-  - purpleAgent
-  - blueAgent
   agentRb: {fileID: 0}
+  field: {fileID: 0}
   initialPos: {x: 0, y: 0, z: 0}
   rotSign: 0
 --- !u!114 &1473949307735227826
@@ -5273,25 +5221,12 @@ MonoBehaviour:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
   MaxStep: 0
+  fieldReward: 0.01
+  fieldPenalty: -0.01
   team: 0
-  field: {fileID: 0}
   position: 2
-  rayPerceptionSensor: {fileID: 0}
-  blueTags:
-  - ball
-  - blueGoal
-  - purpleGoal
-  - wall
-  - blueAgent
-  - purpleAgent
-  purpleTags:
-  - ball
-  - purpleGoal
-  - blueGoal
-  - wall
-  - purpleAgent
-  - blueAgent
   agentRb: {fileID: 0}
+  field: {fileID: 0}
   initialPos: {x: 0, y: 0, z: 0}
   rotSign: 0
 --- !u!114 &7844732061690150015
@@ -6181,25 +6116,12 @@ MonoBehaviour:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
   MaxStep: 0
+  fieldReward: 0.01
+  fieldPenalty: -0.01
   team: 1
-  field: {fileID: 0}
   position: 2
-  rayPerceptionSensor: {fileID: 0}
-  blueTags:
-  - ball
-  - blueGoal
-  - purpleGoal
-  - wall
-  - blueAgent
-  - purpleAgent
-  purpleTags:
-  - ball
-  - purpleGoal
-  - blueGoal
-  - wall
-  - purpleAgent
-  - blueAgent
   agentRb: {fileID: 0}
+  field: {fileID: 0}
   initialPos: {x: 0, y: 0, z: 0}
   rotSign: 0
 --- !u!114 &811573643840596205
@@ -6867,25 +6789,12 @@ MonoBehaviour:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
   MaxStep: 0
+  fieldReward: 0.01
+  fieldPenalty: -0.01
   team: 1
-  field: {fileID: 0}
   position: 2
-  rayPerceptionSensor: {fileID: 0}
-  blueTags:
-  - ball
-  - blueGoal
-  - purpleGoal
-  - wall
-  - blueAgent
-  - purpleAgent
-  purpleTags:
-  - ball
-  - purpleGoal
-  - blueGoal
-  - wall
-  - purpleAgent
-  - blueAgent
   agentRb: {fileID: 0}
+  field: {fileID: 0}
   initialPos: {x: 0, y: 0, z: 0}
   rotSign: 0
 --- !u!114 &218495794010934145
@@ -7309,25 +7218,12 @@ MonoBehaviour:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
   MaxStep: 0
+  fieldReward: 0.01
+  fieldPenalty: -0.01
   team: 0
-  field: {fileID: 0}
   position: 2
-  rayPerceptionSensor: {fileID: 0}
-  blueTags:
-  - ball
-  - blueGoal
-  - purpleGoal
-  - wall
-  - blueAgent
-  - purpleAgent
-  purpleTags:
-  - ball
-  - purpleGoal
-  - blueGoal
-  - wall
-  - purpleAgent
-  - blueAgent
   agentRb: {fileID: 0}
+  field: {fileID: 0}
   initialPos: {x: 0, y: 0, z: 0}
   rotSign: 0
 --- !u!114 &1023485123796557062
@@ -8711,25 +8607,12 @@ MonoBehaviour:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
   MaxStep: 0
+  fieldReward: 0.01
+  fieldPenalty: -0.01
   team: 0
-  field: {fileID: 0}
   position: 2
-  rayPerceptionSensor: {fileID: 0}
-  blueTags:
-  - ball
-  - blueGoal
-  - purpleGoal
-  - wall
-  - blueAgent
-  - purpleAgent
-  purpleTags:
-  - ball
-  - purpleGoal
-  - blueGoal
-  - wall
-  - purpleAgent
-  - blueAgent
   agentRb: {fileID: 0}
+  field: {fileID: 0}
   initialPos: {x: 0, y: 0, z: 0}
   rotSign: 0
 --- !u!114 &6621461428577548545
@@ -9056,7 +8939,6 @@ GameObject:
   - component: {fileID: 2562571719799803906}
   - component: {fileID: 1018414316889932458}
   - component: {fileID: 6939753220642424022}
-  - component: {fileID: 1224916686284086343}
   m_Layer: 0
   m_Name: BlueStriker (1)
   m_TagString: blueAgent
@@ -9157,25 +9039,12 @@ MonoBehaviour:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
   MaxStep: 0
+  fieldReward: 0.01
+  fieldPenalty: -0.01
   team: 1
-  field: {fileID: 0}
   position: 2
-  rayPerceptionSensor: {fileID: 0}
-  blueTags:
-  - ball
-  - blueGoal
-  - purpleGoal
-  - wall
-  - blueAgent
-  - purpleAgent
-  purpleTags:
-  - ball
-  - purpleGoal
-  - blueGoal
-  - wall
-  - purpleAgent
-  - blueAgent
   agentRb: {fileID: 0}
+  field: {fileID: 0}
   initialPos: {x: 0, y: 0, z: 0}
   rotSign: 0
 --- !u!114 &2562571719799803906
@@ -9237,22 +9106,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debugCommandLineOverride: 
---- !u!114 &1224916686284086343
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8360301818957399454}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 38b7cc1f5819445aa85e9a9b054552dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SensorName: VectorSensor
-  m_ObservationSize: 6
-  m_ObservationType: 0
-  m_ObservationStacks: 1
 --- !u!1 &8673569163220857793
 GameObject:
   m_ObjectHideFlags: 0
