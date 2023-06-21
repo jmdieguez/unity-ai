@@ -46,6 +46,11 @@ public class SoccerEnvController : MonoBehaviour
     private SimpleMultiAgentGroup m_PurpleAgentGroup;
 
     private int m_ResetTimer;
+    
+    public GoalScript goalsBlue;
+    public GoalScript goalsPurple;
+    private int goalsB;
+    private int goalsP;
 
     void Start()
     {
@@ -78,6 +83,10 @@ public class SoccerEnvController : MonoBehaviour
         m_ResetTimer += 1;
         if (m_ResetTimer >= MaxEnvironmentSteps && MaxEnvironmentSteps > 0)
         {
+            if(goalsB == goalsP && goalsB == 0){
+                m_PurpleAgentGroup.AddGroupReward(-1);
+                 m_BlueAgentGroup.AddGroupReward(-1); //Penalizamos a los equipos si al final del episodio ninguno hizo gol
+            }
             m_BlueAgentGroup.GroupEpisodeInterrupted();
             m_PurpleAgentGroup.GroupEpisodeInterrupted();
             ResetScene();
@@ -89,35 +98,72 @@ public class SoccerEnvController : MonoBehaviour
     {
         // var randomPosX = Random.Range(-2.5f, 2.5f);
         // var randomPosZ = Random.Range(-2.5f, 2.5f);
-
+        ball.GetComponent<SoccerBallController>().reseting();
         ball.transform.position = m_BallStartingPos; // + new Vector3(randomPosX, 0f, randomPosZ);
         ballRb.velocity = Vector3.zero;
         ballRb.angularVelocity = Vector3.zero;
 
+
     }
 
-    public void GoalTouched(Team scoredTeam)
+    public void GoalTouched(Team scoredTeam, AgentSoccer agentScorer)
     {
-        if (scoredTeam == Team.Blue)
+        if (scoredTeam == Team.Blue) //Si el equipo azul hace gol, se favorece al equipo y se le saca recompensa al rival
         {
             m_BlueAgentGroup.AddGroupReward(1 - (float)m_ResetTimer / MaxEnvironmentSteps);
             m_PurpleAgentGroup.AddGroupReward(-1);
+            goalsB =+1;
+            if(agentScorer){
+                if(agentScorer.team == Team.Blue){
+                    agentScorer.makeGoal(); // Se recompensa al agente que hizo el gol si es del equipo azul
+                    Debug.Log("Gol Azul");
+                }
+                else{
+                    agentScorer.makeOwnGoal(); // Se penaliza al agente que hizo el gol en contra
+                    Debug.Log("Gol Azul (En contra violeta)");
+                }
+            }
+            
+            goalsBlue.Goal(); // Para entrenar esta linea debe de comentarse
         }
-        else
+        if(scoredTeam == Team.Purple)
         {
             m_PurpleAgentGroup.AddGroupReward(1 - (float)m_ResetTimer / MaxEnvironmentSteps);
             m_BlueAgentGroup.AddGroupReward(-1);
+            goalsP =+1;
+            if(agentScorer){
+                if(agentScorer.team == Team.Purple){
+                    agentScorer.makeGoal(); // Se recompensa al agente que hizo el gol si es del equipo violeta
+                    Debug.Log("Gol Violeta");
+                }
+                else{
+                    agentScorer.makeOwnGoal(); // Se penaliza al agente que hizo el gol en contra
+                    Debug.Log("Gol Violeta (En contra azul)");
+                }
+            }
+
+            goalsPurple.Goal(); // Para entrenar esta linea debe de comentarse
         }
         m_PurpleAgentGroup.EndGroupEpisode();
         m_BlueAgentGroup.EndGroupEpisode();
         ResetScene();
 
     }
-
+    public bool isNearToBall(Agent agent){
+        float distanceToTarget = Vector3.Distance(agent.transform.position, ball.transform.position);
+        return (distanceToTarget < 10.0f);
+    }
 
     public void ResetScene()
     {
         m_ResetTimer = 0;
+        goalsB = 0;
+        goalsP = 0;
+
+        
+        //Reset Ball
+        ResetBall();
+
 
         //Reset Agents
         foreach (var item in AgentsList)
@@ -132,7 +178,5 @@ public class SoccerEnvController : MonoBehaviour
             item.Rb.angularVelocity = Vector3.zero;
         }
 
-        //Reset Ball
-        ResetBall();
     }
 }

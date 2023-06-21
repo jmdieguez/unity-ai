@@ -30,6 +30,9 @@ TagManager:
   - purpleAgent
   - purpleGoal
   - tile
+  - blueField
+  - purpleField
+  - field
   layers:
   - Default
   - TransparentFX

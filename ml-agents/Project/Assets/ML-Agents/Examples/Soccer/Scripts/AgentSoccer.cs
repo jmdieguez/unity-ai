@@ -19,15 +19,19 @@ public class AgentSoccer : Agent
     // The coefficient for the reward for colliding with a ball. Set using curriculum.
     float m_BallTouch;
 
-    [HideInInspector]
-    public Team team;
+    // Add a new field to hold the reward for staying in the field
+    public float fieldReward;
 
+    // Add a new field to hold the penalty for going upfield
+    public float fieldPenalty;
+    
     public enum Position
     {
         Striker,
         Goalie,
         Generic,
-        Defender
+        Defender,
+        Midfielder
     }
     public GameObject field;
 
@@ -63,18 +67,27 @@ public class AgentSoccer : Agent
     float m_LateralSpeed;
     float m_ForwardSpeed;
 
+    private int stepsWithoutTouchingBall; // Variable para realizar un seguimiento de los pasos sin tocar el balón
+    private bool hasTouchedBall = false;
+
+
+    public GameObject enemyGoal;
+
     [HideInInspector]
     public Rigidbody agentRb;
     SoccerSettings m_SoccerSettings;
     BehaviorParameters m_BehaviorParameters;
     public Vector3 initialPos;
     public float rotSign;
+    private bool inField = true;
+    SoccerEnvController envController;
 
+    private AgentSoccer lastTouched;
     EnvironmentParameters m_ResetParams;
 
     public override void Initialize()
     {
-        SoccerEnvController envController = GetComponentInParent<SoccerEnvController>();
+        envController = GetComponentInParent<SoccerEnvController>();
         if (envController != null)
         {
             m_Existential = 1f / envController.MaxEnvironmentSteps;
@@ -99,17 +112,22 @@ public class AgentSoccer : Agent
         }
         if (position == Position.Goalie)
         {
-            m_LateralSpeed = 1.0f;
-            m_ForwardSpeed = 1.0f;
+            m_LateralSpeed = 0.75f;
+            m_ForwardSpeed = 0.5f;
         }
         else if (position == Position.Striker)
         {
             m_LateralSpeed = 0.3f;
-            m_ForwardSpeed = 1.3f;
+            m_ForwardSpeed = 1.2f;
+        }
+        else if (position == Position.Midfielder)
+        {
+            m_LateralSpeed = 0.4f;
+            m_ForwardSpeed = 1.5f;
         }
         else
         {
-            m_LateralSpeed = 0.3f;
+            m_LateralSpeed = 0.4f;
             m_ForwardSpeed = 1.0f;
         }
         m_SoccerSettings = FindObjectOfType<SoccerSettings>();
@@ -121,7 +139,6 @@ public class AgentSoccer : Agent
 
         m_ResetParams = Academy.Instance.EnvironmentParameters;
     }
-
     public void MoveAgent(ActionSegment<int> act)
     {
         var dirToGo = Vector3.zero;
@@ -137,7 +154,7 @@ public class AgentSoccer : Agent
         {
             case 1:
                 dirToGo = transform.forward * m_ForwardSpeed;
-                m_KickPower = 1f;
+                m_KickPower = 2.5f;
                 break;
             case 2:
                 dirToGo = transform.forward * -m_ForwardSpeed;
@@ -168,32 +185,152 @@ public class AgentSoccer : Agent
         agentRb.AddForce(dirToGo * m_SoccerSettings.agentRunSpeed,
             ForceMode.VelocityChange);
     }
-
+    //Sirve para saber si esta dentro de su area
     void OnTriggerEnter(Collider other)
-    {  
-        if (other.gameObject == field.gameObject)
-        {
-           AddReward(m_Existential);
+    {   
+         if (other.gameObject == this.field)
+         {
+            inField = true;
+         }
+    }
+    //Sirve para saber si esta fuera de su area
+    void OnTriggerExit(Collider other)
+    {   
+         if (other.gameObject == this.field)
+         {
+            inField = false;
+         }
+    }
+    //Aplica la recompensa por estar dentro o fuera de su area
+    void fieldRecompense(){
+        if(position == Position.Goalie || position == Position.Defender){
+             if (!inField)
+            {
+                // Aplica una penalización por salir del campo
+                AddReward(fieldPenalty);
+                
+                //Debug.Log("PENALIZACION salir del area " + position + " " + team);
+            }
+            else{
+                AddReward(fieldReward);
+                //Debug.Log("Recompensa no salir del area");
+            }
         }
-        else
-        {
-           AddReward(-m_Existential);
+        
+    }
+
+    public override void CollectObservations(VectorSensor sensor)
+    {
+        float posicionNum;
+        if((position == Position.Midfielder)){
+                posicionNum = 2;
+        }
+        if(position == Position.Striker){
+                posicionNum = 3;
+        }
+        if(position == Position.Defender){
+                posicionNum = 1;
+        }
+        else{
+                posicionNum=0;
+        }
+        lastTouched = envController.ball.GetComponent<SoccerBallController>().lastTouch;
+        sensor.AddObservation(inField); //Los jugadores conocen si estan o no en su campo
+        sensor.AddObservation(posicionNum);    //Los jugadores conocen su rol en la cancha
+        sensor.AddObservation(stepsWithoutTouchingBall);    // Los jugadores conocen cuantos pasos llevan sin tocar el balon
+        // Direction is facing (1 Vector3 = 3 values)
+        sensor.AddObservation(transform.forward);       //Los jugadores conocen cual es su parte "Delantera" (Donde le pegan con mas fuerza)
+        sensor.AddObservation(hasTouchedBall);
+        sensor.AddObservation(lastTouched);
+        sensor.AddObservation(envController.isNearToBall(this));
+        // 1 + 1 + 1 +  3  + 1 + 1 + 1  = 9 values
+    }
+
+
+    public void makeGoal(){
+        if((position != Position.Goalie)){ //Los arqueros deberian no hacer goles, su roll es quedarse en el arco
+                AddReward(0.8f); 
+                //Debug.Log("RECOMPENSA hacer gol");
+        }
+        if((position == Position.Striker)){ //Los delanteros tienen un extra por hacer un gol
+                AddReward(0.2f); 
+                //Debug.Log("RECOMPENSA bonus gol delantero");
+        }
+    }
+    public void makeOwnGoal(){
+        if((position != Position.Goalie)){
+                AddReward(-1f);
+                //Debug.Log("PENALIZACION gol en contra");
+        }
+        else{
+            AddReward(-0.25f); //Un arquero no deberia ser tan penalizado por hacerlo en contra, se supone que quiso atajar
+            //Debug.Log("PENALIZACION gol en contra arquero");
         }
     }
 
-    public override void OnActionReceived(ActionBuffers actionBuffers)
-
-    {   
-        if (position == Position.Defender)
-        {
-            // Existential bonus for Defenders.
-            AddReward(m_Existential);
+    public void nearToBall(){
+        if(position != Position.Goalie){
+            
+            if(envController.isNearToBall(this)){ // El arquero no necesariamente tiene que estar cerca de la pelota, los defensores tampoco
+                /*
+                if((position == Position.Midfielder)){
+                    AddReward(0.3f);
+                }
+                if(position == Position.Striker){
+                    AddReward(0.25f);
+                }
+                else{
+                    AddReward(0.095f);
+                }
+                //Debug.Log("RECOMPENSA estar cerca del balon");
+            */
+            }
+            else{
+                if(position == Position.Defender){
+                    AddReward(-0.05f);
+                }
+                else{
+                   AddReward(-0.10f);
+                }
+                //Debug.Log("PENALIZACION estar lejos del balon");
+            }
         }
+    }
 
+    public void touchingRecompense(){
+        if(hasTouchedBall){
+            hasTouchedBall = false;
+            stepsWithoutTouchingBall = 0;
+            return;
+        }
+        else{
+            stepsWithoutTouchingBall ++;
+        }
+        
+        if(position != Position.Goalie){
+            if(stepsWithoutTouchingBall > 1750f){
+                AddReward(-0.008f);
+            }
+        }
+    }
+
+
+    public override void OnActionReceived(ActionBuffers actionBuffers)
+    {   
+        //Los arqueros no tiene bonus existencial, su bonus se basa en no salir del area
         if (position == Position.Goalie)
         {
-            // Existential bonus for Goalies.
-            AddReward(m_Existential);
+            AddReward(-m_Existential);
+        }
+        else if (position == Position.Defender)
+        {
+            // Existential bonus for Defenders.
+            AddReward(-m_Existential);
+        }
+        else if (position == Position.Midfielder)
+        {
+            // Existential bonus for Midfielders.
+            AddReward(-m_Existential);
 
         }
         else if (position == Position.Striker)
@@ -201,10 +338,132 @@ public class AgentSoccer : Agent
             // Existential penalty for Strikers
             AddReward(-m_Existential);
         }
-
+        
+        fieldRecompense();
+        touchingRecompense();
+        nearToBall();
         MoveAgent(actionBuffers.DiscreteActions);
+
+
     }
 
+
+    public void kickToEnemyGoal(Vector3 dir){
+        if (Vector3.Dot(dir, enemyGoal.transform.position - transform.position) > 0.9f)
+    {
+        AddReward(0.2f); // Recompensa por patear hacia el arco rival
+        //Debug.Log("RECOMPENSA patear arco rival");
+        if(position == Position.Striker){
+            AddReward(0.30f);
+        }
+    }
+    else
+    {
+        AddReward(-0.4f); // Penalizaci�n por patear en direcci�n opuesta al arco rival
+        //Debug.Log("PENALIZACION patear a propio arco");
+    }
+    }
+
+    void OnCollisionEnter(Collision c)
+    {   
+    
+        if((c.gameObject.CompareTag("blueAgent")) && (team == Team.Blue) || (c.gameObject.CompareTag("purpleAgent")) && (team == Team.Purple)){
+            AddReward(-0.4f ); // Que no se choquen entre compa�eros
+            //Debug.Log("PENALIZACION chocar con compa�ero");
+            var dir = c.contacts[0].point - transform.position;
+            dir = dir.normalized;
+            var force = 30000f;
+            c.gameObject.GetComponent<Rigidbody>().AddForce(dir * force);
+        }
+
+        if(c.gameObject.CompareTag("wall")){
+            AddReward(-0.8f ); // Que no hagan tiempo contra la pared
+            //Debug.Log("PENALIZACION chocar con pared");
+        }
+        
+        if(this.position == Position.Defender || this.position == Position.Midfielder){
+            var dir = c.contacts[0].point - transform.position;
+            dir = dir.normalized;
+            var force = 70000f;
+            
+            if((c.gameObject.CompareTag("blueAgent") && team == Team.Purple) || 
+                (c.gameObject.CompareTag("purpleAgent") && team == Team.Blue ) ){
+                    AddReward(0.15f); 
+                    c.gameObject.GetComponent<Rigidbody>().AddForce(dir * force);
+                    c.gameObject.GetComponent<AgentSoccer>().AddReward(-0.55f);
+
+            }
+        }
+        if (c.gameObject.CompareTag("ball"))
+        {
+            var force = k_Power * m_KickPower;
+            hasTouchedBall = true;
+            if(lastTouched)
+            {
+                if(position == Position.Goalie)
+                {
+                force = k_Power;
+                    if(!inField)
+                    {
+                         AddReward(-1f); //Si el arquero toca el balon fuera de su area, se lo castiga 
+                    }
+                    else{
+                        if(this.team != lastTouched.team)
+                        {
+                            AddReward(0.8f);  // Si el arquero toca el balon cuando la habia tocado alguien del otro equipo se lo recompensa
+                        }
+                        else{
+                            AddReward(0.2f);    //El arquero solo obtiene recompensa por tocar el balon cuando esta dentro de su area
+                        }
+                    }
+                    
+                }
+                
+                if(position == Position.Defender)
+                {
+                    if(this.team != lastTouched.team )
+                    {
+                        AddReward(0.15f);// Si el defensor toca el balon cuando la habia tocado alguien del otro equipo se lo recompensa
+                    }
+                }
+                
+                if(position == Position.Midfielder)
+                {
+                    if(this == lastTouched )
+                    {
+                        AddReward(0.15f);// Si el mediocampista Toca mas de una vez seguida la pelota se lo premia
+                    }
+                }
+                if(lastTouched.team == this.team && (this != lastTouched)){
+                    lastTouched.AddReward(0.05f); // Recompensa por hacer un pase
+                    AddReward(0.05f);
+                }
+            
+            }
+            
+            
+            if(!lastTouched && position != Position.Goalie){
+                AddReward(0.3f);
+                //Debug.Log("RECOMPENSA first touch");
+            }
+            var dir = c.contacts[0].point - transform.position;
+            dir = dir.normalized;
+            if(position != Position.Goalie)
+            {
+                kickToEnemyGoal(dir);
+                AddReward(0.55f); //Recompensa por tomar contacto con el balon
+                //Debug.Log("RECOMPENSA tocar balon");
+            }
+            c.gameObject.GetComponent<Rigidbody>().AddForce(dir * force);
+        }
+    }
+
+    public override void OnEpisodeBegin()
+    {
+        stepsWithoutTouchingBall = 0;
+        m_BallTouch = m_ResetParams.GetWithDefault("ball_touch", 1);
+
+    }
     public override void Heuristic(in ActionBuffers actionsOut)
     {
         var discreteActionsOut = actionsOut.DiscreteActions;
@@ -235,66 +494,6 @@ public class AgentSoccer : Agent
         {
             discreteActionsOut[1] = 2;
         }
-    }
-
-    public override void CollectObservations(VectorSensor sensor)
-    {
-        sensor.Reset();
-
-        rayPerceptionSensor.DetectableTags = (team == Team.Blue) ? blueTags : purpleTags;
-
-        int numRays = rayPerceptionSensor.RaysPerDirection * 2 + 1; // Assuming equal rays on both sides
-        float startAngle = -rayPerceptionSensor.MaxRayDegrees;
-        float angleIncrement = (rayPerceptionSensor.MaxRayDegrees * 2) / (numRays - 1);
-
-        for (int i = 0; i < numRays; i++)
-        {
-            float rayAngle = startAngle + (i * angleIncrement);
-            Vector3 rayDirection = Quaternion.Euler(0f, rayAngle, 0f) * transform.forward;
-            float rayDistance = rayPerceptionSensor.RayLength;
-
-            RaycastHit hit;
-            bool hasHit = Physics.Raycast(rayPerceptionSensor.transform.position, rayDirection, out hit, rayDistance);
-
-            if (hasHit)
-            {
-                float hitDistance = hit.distance;
-                string hitTag = hit.collider.tag;
-                Vector3 hitNormal = hit.normal;
-
-
-                sensor.AddObservation(hitDistance);
-                int tagIndex;
-                if (tagToIntMap.TryGetValue(hitTag, out tagIndex))
-                {
-                    // Key exists in the dictionary, add the observation
-                    sensor.AddObservation(tagIndex);
-                }
-                else
-                {
-                    // Key does not exist, add a placeholder value
-                    sensor.AddObservation(-1);
-                }
-                
-                sensor.AddObservation(hitNormal.x);
-                sensor.AddObservation(hitNormal.y);
-                sensor.AddObservation(hitNormal.z);
-            }
-            else
-            {
-                sensor.AddObservation(rayDistance); // No hit distance
-                sensor.AddObservation(-1); // No tag
-                sensor.AddObservation(0f); // No hit normal x
-                sensor.AddObservation(0f); // No hit normal y
-                sensor.AddObservation(0f); // No hit normal z
-            }
-        }
-
-        // Collect visual observations using the RayPerceptionSensor
-        int positionIndex = (int) position;
-        sensor.AddOneHotObservation(positionIndex, 4);
-        // Add the position of the field to the observations
-        sensor.AddObservation(field.transform.position);
     }
 
     /// <summary>
