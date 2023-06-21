@@ -53,7 +53,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.ml-agents": {
-      "version": "file:C:/Users/dsasasdad/Documents/ia/unity-ai/ml-agents/com.unity.ml-agents",
+      "version": "file:../../com.unity.ml-agents",
       "depth": 0,
       "source": "local",
       "dependencies": {

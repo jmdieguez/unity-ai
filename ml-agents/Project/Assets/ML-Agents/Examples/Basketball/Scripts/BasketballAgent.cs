@@ -21,11 +21,15 @@ public class BasketballAgent : Agent
     private Quaternion originalAgentRotationValue;
     private Quaternion originalBallRotationValue;
 
-    void Start()
+    public override void Initialize()
     {
         m_BasketballSettings = FindObjectOfType<BasketballSettings>();
         rBody = GetComponent<Rigidbody>();
         ballRBody = ball.GetComponent<Rigidbody>();
+    }
+
+    void Start()
+    {
         originalBallRotationValue = ball.transform.rotation;
         originalAgentRotationValue = this.transform.rotation;
         GrabBall();

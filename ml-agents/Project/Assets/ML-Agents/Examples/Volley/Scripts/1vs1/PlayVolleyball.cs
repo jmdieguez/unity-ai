@@ -24,9 +24,13 @@ public class PlayVolleyball : Agent
     private int collisionStayCounter;
     private bool firstEpCollision;
 
+    public override void Initialize()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
+
     private void Start() {
         initPosition = transform.localPosition;
-        rb = GetComponent<Rigidbody>();
         ballInMyField = field.tag == "field1" ? ball.transform.localPosition.x < 0f : ball.transform.localPosition.x > 0f;
         //lo invierto para que empiece bien en OnEpisodeBegin()
         ballInMyField = !ballInMyField;
