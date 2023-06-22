@@ -9,9 +9,6 @@ using Random = UnityEngine.Random;
 
 public class WalkerAgent : Agent
 {
-    private Vector3 previousFootLPosition;
-    private Vector3 previousFootRPosition;
-
     private float stepLength;
     private float footTimer;
     private int leadingFoot;
@@ -119,9 +116,6 @@ public class WalkerAgent : Agent
             randomizeWalkSpeedEachEpisode ? Random.Range(0.1f, m_maxWalkingSpeed) : MTargetWalkingSpeed;
 
         SetResetParameters();
-
-        previousFootLPosition = footL.position;
-        previousFootRPosition = footR.position;
 
         footTimer = 0f;
         leadingFoot = UnityEngine.Random.Range(0, 2); // Randomly choose 0 or 1 (left or right foot)
