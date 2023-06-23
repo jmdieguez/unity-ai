@@ -11,6 +11,12 @@ Trabajo práctico grupal de la materia INTELIGENCIA ARTIFICIAL (9525) de la Facu
 ---
 ## Introducción
 
+El proyecto se trata de modelos de IA entrenados a partir de aprendizaje por refuerzo, que es una técnica de enseñanza que implica recompensar los comportamientos positivos y castigar los negativos. 
+
+Para desarrollar el trabajo utilizamos “ML-Agents”, un framework de aprendizaje por refuerzo desarrollado por Unity Technologies que permite a los desarrolladores de juegos y otros entornos de simulación entrenar agentes de inteligencia artificial (IA) en entornos virtuales.
+
+Para la visualización del entrenamiento a lo largo del tiempo usamos TensorBoard, el kit de herramientas desarrollado por TensorFlow.
+
 ...
 
 ---
