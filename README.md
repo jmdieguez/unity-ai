@@ -15,9 +15,19 @@ El proyecto se trata de modelos de IA entrenados a partir de aprendizaje por ref
 
 Para desarrollar el trabajo utilizamos “ML-Agents”, un framework de aprendizaje por refuerzo desarrollado por Unity Technologies que permite a los desarrolladores de juegos y otros entornos de simulación entrenar agentes de inteligencia artificial (IA) en entornos virtuales.
 
+<br>
+<p align="center">
+  <img src="https://pbs.twimg.com/media/EiyTLiuXYAYyvcO.jpg"/>
+</p>
+<br>
+
 Para la visualización del entrenamiento a lo largo del tiempo usamos TensorBoard, el kit de herramientas desarrollado por TensorFlow.
 
-...
+<br>
+<p align="center">
+  <img src="https://www.tensorflow.org/static/site-assets/images/project-logos/tensorboard-logo-social.png" width="600" height="337"/>
+</p>
+<br>
 
 ---
 <div align="center">
