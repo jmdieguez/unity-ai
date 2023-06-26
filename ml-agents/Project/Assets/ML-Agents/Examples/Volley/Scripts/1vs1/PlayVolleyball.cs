@@ -75,7 +75,7 @@ public class PlayVolleyball : Agent
         float moveSpeed = 8f;
         float jumpForce = 6.5f;
 
-        Vector3 movement = new Vector3(moveX, 0f, moveZ) * moveSpeed * Time.deltaTime;
+        Vector3 movement = new Vector3(moveX, 0f, moveZ) * moveSpeed * Time.fixedDeltaTime;
         transform.Translate(movement);
 
 

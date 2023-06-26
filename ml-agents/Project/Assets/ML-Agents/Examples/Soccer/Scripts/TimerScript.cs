@@ -14,8 +14,7 @@ public class TimerScript : MonoBehaviour
         seconds = 0;
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         minutes = (int)(Time.time/60f);
         seconds = (int)(Time.time%60f);

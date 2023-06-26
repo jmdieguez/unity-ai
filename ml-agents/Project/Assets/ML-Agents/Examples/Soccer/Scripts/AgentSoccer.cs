@@ -163,7 +163,7 @@ public class AgentSoccer : Agent
                 break;
         }
 
-        transform.Rotate(rotateDir, Time.deltaTime * 100f);
+        transform.Rotate(rotateDir, Time.fixedDeltaTime * 100f);
         agentRb.AddForce(dirToGo * m_SoccerSettings.agentRunSpeed,
             ForceMode.VelocityChange);
     }
