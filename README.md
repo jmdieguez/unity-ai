@@ -35,7 +35,7 @@ Para la visualización del entrenamiento a lo largo del tiempo usamos TensorBoar
 | Realizado por:                                                      |
 | ------------------------------------------------------------------- |
 | [Manuel Diéguez](https://github.com/jmdieguez)                      |
-| [nombre](https://github.com/usuario)                                |
+| [Tomás Della Vecchia](https://github.com/tomdv18)                   |
 | [nombre](https://github.com/usuario)                                |
 | [nombre](https://github.com/usuario)                                |
 
