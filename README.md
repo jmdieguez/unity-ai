@@ -60,44 +60,50 @@ Consta de un aprendizaje empírico, por lo que el agente informático está en c
 <br>
 <div align="left">
 
-## Frameworks utilizados
+## Dependencias
+
+- Python (3.8.13 o superior)
+
 Para desarrollar el trabajo utilizamos [**ML-Agents**](https://unity-technologies.github.io/ml-agents/), un framework de aprendizaje por refuerzo desarrollado por [Unity Technologies](https://store.unity.com/download) que permite a los desarrolladores de juegos y otros entornos de simulación entrenar agentes de inteligencia artificial (IA) en entornos virtuales.
+  
+```
+$ python -m pip install mlagents==0.30.0
+```
+
+- Unity (2021.3 o posterior)
+- Paquete de Unity com.unity.ml-agents
+- Paquete de Unity com.unity.ml-agents.extensions
 
 <div align="center">
 <img title="a title" alt="Alt text" src="/ml-agents/docs/images/image-banner.png">
 </div>
 
 
-Para la visualización del entrenamiento a lo largo del tiempo usamos **TensorBoard**, el kit de herramientas desarrollado por TensorFlow. Dentro de la aplicación se pueden analizar las estadísticas de entrenamiento como también el cambio de la política de los modelos a lo largo del tiempo. Para correr TensorBoard, usar:
+Para la visualización del entrenamiento a lo largo del tiempo usamos **TensorBoard**, el kit de herramientas desarrollado por TensorFlow. Dentro de la aplicación se pueden analizar las estadísticas de entrenamiento como también el cambio de la política de los modelos a lo largo del tiempo. 
 
 ```bash
-$ tensorboard --logdir results
+$ pip install tensorboard
 ```
 
-Donde **results** es la carpeta generada por ML-Agents con los respectivos modelos de redes neuronales.
-
-</p>
-</br>
-
-<p>
-<br>
 <div align="center">
 <img src="https://www.tensorflow.org/static/site-assets/images/project-logos/tensorboard-logo-social.png" width="600" height="337"/>
-</p>
-</br>
-  
-PyTorch es una biblioteca open source para realizar cómputos usando data flow graphs, la forma fundamental de representar modelos de aprendizaje profundo. Además facilita el entrenamiento y aprendizaje en CPU y GPU 
+</div>
 
-<p>
-<br>
+PyTorch es una biblioteca open source para realizar cómputos usando data flow graphs, la forma fundamental de representar modelos de aprendizaje profundo. Además facilita el entrenamiento y aprendizaje en CPU y GPU.
+
+```bash
+$ pip3 install torch~=1.7.1 -f https://download.pytorch.org/whl/torch_stable.html
+```
+
 <div align="center">
 <img src="https://149695847.v2.pressablecdn.com/wp-content/uploads/2020/02/Pytorch.png"/>
-</p>
-</br>
-  
+</div>
+
 ## Entrenamiento
 
 ML-Agents usa una técnica de entrenamiento por refuerzo llamada **PPO** (Optimización de políticas próximas) es una técnica que utiliza una red neuronal para aproximar la función ideal que asigna las observaciones de un agente a la mejor acción que un agente puede realizar en un estado determinado.
+
+Para configurar el entrenamiento se usa un archivo de formato YAML con el cual podemos alterar los valores iniciales de la política del modelo. Entre otras, se contienen estas variables:
 
 | Variable | Descripción |
 | ----------- | ----------- |
@@ -105,7 +111,56 @@ ML-Agents usa una técnica de entrenamiento por refuerzo llamada **PPO** (Optimi
 | **beta** | Corresponde a la fuerza de la regularización de la entropía, lo que hace que la política sea "más aleatoria". Esto asegura que los agentes exploren adecuadamente el espacio de acción durante el entrenamiento.|
 | **gamma** | Factor de descuento para recompensas futuras. Esto se puede considerar como qué tan lejos en el futuro el agente debería preocuparse por las posibles recompensas. En situaciones en las que el agente debería estar actuando en el presente para prepararse para las recompensas en un futuro lejano, este valor debería ser grande. En los casos en que las recompensas son más inmediatas, puede ser menor.|
 | **epsilon** | Umbral aceptable de divergencia entre la política antigua y la nueva durante la actualización del gradiente descendente. Establecer este valor en un valor pequeño dará como resultado actualizaciones más estables, pero también ralentizará el proceso de capacitación.
-| **buffer_size** | Cuántas experiencias (observaciones de agentes, acciones y recompensas obtenidas) se deben recopilar antes de realizar cualquier aprendizaje o actualización del modelo. |
+| **buffer_size** | Cuántas experiencias (observaciones de agentes, acciones y recompensas obtenidas) se deben recopilar antes de realizar cualquier aprendizaje o actualización del modelo. Un valor muy alto puede perjudicar el entrenamiento |
+| **batch_size** | Número de experiencias utilizadas para una iteración de una actualización de descenso de gradiente. Esto siempre debe ser una fracción del **buffer_size** |
+| **learning_rate** | Fuerza de cada paso de actualización de descenso de gradiente.|
+| **num_layers** | Cuántas capas ocultas están presentes después de la entrada de observación.|
+| **hidden_units** | Cuántas unidades hay en cada capa completamente conectada de la red neuronal.|
+| **max_steps** | Cuantos pasos de la simulación durará el entrenamiento. Para problemas más complejos se debería subir el número"
+
+Un ejemplo de archivo:
+
+    behaviors:
+      Walker:
+        trainer_type: ppo
+        hyperparameters:
+          batch_size: 2048 // 
+          buffer_size: 20480
+          learning_rate: 0.0003
+          beta: 0.005
+          epsilon: 0.2
+          lambd: 0.95
+          num_epoch: 3
+          learning_rate_schedule: linear
+        network_settings:
+          normalize: true
+          hidden_units: 512
+          num_layers: 3
+          vis_encode_type: simple
+        reward_signals:
+          extrinsic:
+            gamma: 0.995
+            strength: 1.0
+        keep_checkpoints: 5
+        max_steps: 30000000
+        time_horizon: 1000
+        summary_freq: 30000
+
+Para iniciar una sesión de entrenamiento, solo basta tener abierto en Unity la escena con el agente que se busca entrenar y correr:
+
+    mlagents-learn <path al archivo de configuración> --run-id= <id único del modelo de red neuronal>
+
+Se puede usar los siguientes flags:
+
+- --resume : Reanudar una sesión de entrenamiento para un id dado.
+- --force : Sobreescribir un id.
+- --initialize-from= : Comenzar una sesión de entrenamiento para un nuevo id a partir de un modelo preentrenado.
+
+Para correr TensorBoard y visualizar el progreso del modelo como también la actualización de la política del modelo correr:
+
+```bash
+$ tensorboard --logdir results
+```
 
 ## Bibliografía
 
@@ -113,7 +168,7 @@ ML-Agents usa una técnica de entrenamiento por refuerzo llamada **PPO** (Optimi
 
 [Example Learning Environments](https://github.com/Unity-Technologies/ml-agents/blob/develop/docs/Learning-Environment-Examples.md)
 
-[Installation & Set-up](https://github.com/miyamotok0105/unity-ml-agents/blob/master/docs/Installation.md)
+[Unity Installation & Set-up](https://github.com/miyamotok0105/unity-ml-agents/blob/master/docs/Installation.md)
 
 [Training with Proximal Policy Optimization](https://github.com/miyamotok0105/unity-ml-agents/blob/master/docs/Training-PPO.md)
 
@@ -125,13 +180,8 @@ ML-Agents usa una técnica de entrenamiento por refuerzo llamada **PPO** (Optimi
 
 [Using TensorBoard to Observe Training](https://github.com/Unity-Technologies/ml-agents/blob/develop/docs/Using-Tensorboard.md#using-tensorboard-to-observe-training)
 
-</p>
-</br>
-
 ## Autores
 
-<p>
-<br>
 <div align="center">
   
 | Realizado por:                                                      |
@@ -140,6 +190,5 @@ ML-Agents usa una técnica de entrenamiento por refuerzo llamada **PPO** (Optimi
 | [Tomás Della Vecchia](https://github.com/tomdv18)                   |
 | [Santiago Marczewski](https://github.com/smarczewski)               |
 | [Ignacio Montecalvo](https://github.com/imontecalvo)                |
-  
-</p>
-</br>
+
+  </div>
