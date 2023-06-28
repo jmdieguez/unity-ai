@@ -76,7 +76,7 @@ Finalmente este ejemplo busca explorar el aprendizaje de agentes vs agentes, es 
 
 Inicio             |  Resultado Final
 :-------------------------:|:-------------------------:
-|<p float=left align="middle"><img src="./ml-agents/docs/images/basquet_inicio.gif" width="380" /></p>  | <p float=left align="middle"><img src="./ml-agents/docs/images/basquet_final.gif" width="380" /></p>|
+|<p float=left align="middle"><img src="./ml-agents/docs/images/futbolBase.gif" width="380" /></p>  | <p float=left align="middle"><img src="./ml-agents/docs/images/futbolFinal.gif" width="380" /></p>|
 
 
 
