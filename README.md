@@ -21,15 +21,40 @@ Proyecto de entrenamiento de modelos de IA con aprendizaje por refuerzo (reinfor
 El aprendizaje por refuerzo es una técnica de enseñanza que implica recompensar los comportamientos positivos y castigar los negativos. 
 Consta de un aprendizaje empírico, por lo que el agente informático está en constante búsqueda de aquellas decisiones que le premien y a la par evita aquellos caminos que, por experiencia propia, son penalizados.
 
+<div align="center">
+<img title="a title" alt="Alt text" src="/ml-agents/docs/images/ciclo.JPG">
+</div>
+
 - Agente: La entidad que aprende y toma decisiones.
 
 - Entorno: El contexto en el que el agente interactúa y recibe retroalimentación.
 
-- Observaciones: Los distintos elementos que componen el entorno
+<div align="center">
+<img title="a title" alt="Alt text" src="/ml-agents/docs/images/voley2.JPG">
 
-- Acciones: Las opciones que el agente puede tomar en respuesta a las observaciones del entorno.
+<img title="a title" alt="Alt text" src="/ml-agents/docs/images/basquet.JPG">
+</div>
+
+- Observaciones: Los distintos elementos que componen el entorno. Corresponde a la capa de entrada de la red neuronal.
+
+<div align="center">
+<img title="a title" alt="Alt text" src="/ml-agents/docs/images/voley.JPG">
+
+<img title="a title" alt="Alt text" src="/ml-agents/docs/images/observaciones.JPG">
+</div>
+
+- Acciones: Las opciones que el agente puede tomar en respuesta a las observaciones del entorno. Corresponde a la capa de salida de la red neuronal.
+
+<div align="center">
+<img title="a title" alt="Alt text" src="/ml-agents/docs/images/basquet2.JPG">
+
+</div>
 
 - Recompensas: La retroalimentación positiva o negativa que el agente recibe por sus acciones.
+
+<div align="center">
+<img title="a title" alt="Alt text" src="/ml-agents/docs/images/voley3.JPG">
+</div>
 
 Para desarrollar el trabajo utilizamos **ML-Agents**, un framework de aprendizaje por refuerzo desarrollado por Unity Technologies que permite a los desarrolladores de juegos y otros entornos de simulación entrenar agentes de inteligencia artificial (IA) en entornos virtuales.
 
