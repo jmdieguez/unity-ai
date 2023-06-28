@@ -3,7 +3,7 @@
 Proyecto de entrenamiento de modelos de IA con aprendizaje por refuerzo (**Reinforcement Learning**) en Unity. Corresponde a el trabajo práctico grupal de la materia **INTELIGENCIA ARTIFICIAL (95.25)** de la Facultad de Ingeniería de la Universidad de Buenos Aires (**FIUBA**).
 
 
-<img src="https://pbs.twimg.com/media/EiyTLiuXYAYyvcO.jpg" width="811"/>
+<img title="Screenshot del menú" alt="Una screenshot del menú" src="./ml-agents/docs/images/screenshot_menu_full.png" width="811"/>
 
 
 ## Sobre el proyecto
@@ -19,7 +19,7 @@ La idea del proyecto era realizar dos ejemplos nuevos de entornos relativamente 
 El aprendizaje por refuerzo es una técnica de enseñanza que implica recompensar los comportamientos positivos y castigar los negativos. 
 Consta de un aprendizaje empírico, por lo que el agente informático está en constante búsqueda de aquellas decisiones que le premien y a la par evita aquellos caminos que, por experiencia propia, son penalizados.
 
-<img title="a title" alt="Alt text" src="./ml-agents/docs/images/rl_ciclo.png" width="800">
+<img title="Ciclo de aprendizaje por refuerzo" alt="Un esquema del ciclo de aprendizaje por refuerzo" src="./ml-agents/docs/images/rl_ciclo.png" width="800">
 
 ### Algunos conceptos:
 
@@ -76,7 +76,7 @@ Finalmente este ejemplo busca explorar el aprendizaje de agentes vs agentes, es 
 
 Inicio             |  Resultado Final
 :-------------------------:|:-------------------------:
-|<p float=left align="middle"><img src="./ml-agents/docs/images/basquet_inicio.gif" width="380" /></p>  | <p float=left align="middle"><img src="./ml-agents/docs/images/basquet_final.gif" width="380" /></p>|
+|<p float=left align="middle"><img src="./ml-agents/docs/images/futbolBase.gif" width="380" /></p>  | <p float=left align="middle"><img src="./ml-agents/docs/images/FutbolFinal.gif" width="380" /></p>|
 
 
 
@@ -84,7 +84,7 @@ Inicio             |  Resultado Final
 ---
 
 
-<img title="a title" alt="Alt text" src="./ml-agents/docs/images/rl_ciclo_desarrollo.png" width="811">
+<img title="El ciclo de desarrollo del proyecto" alt="Un esquema del ciclo de desarrollo del proyecto" src="./ml-agents/docs/images/rl_ciclo_desarrollo.png" width="811">
 
 
 
