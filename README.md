@@ -2,18 +2,18 @@
 
 Proyecto de entrenamiento de modelos de IA con aprendizaje por refuerzo (**Reinforcement Learning**) en Unity. Corresponde a el trabajo práctico grupal de la materia **INTELIGENCIA ARTIFICIAL (95.25)** de la Facultad de Ingeniería de la Universidad de Buenos Aires (**FIUBA**).
 
-<br/>
+
 <img src="https://pbs.twimg.com/media/EiyTLiuXYAYyvcO.jpg" width="811"/>
-<br/>
+
 
 ## Sobre el proyecto
 ---
-<br/>
+
 
 ### Introducción
 La idea del proyecto era realizar dos ejemplos nuevos de entornos relativamente simples y refinar o mejorar dos de los ejemplos provistos por el equipo de ML-Agents en el toolkit (cuatro ejemplos en total), para intentar abarcar más aspectos del tema pero manteniendolo manejable. Se eligió encararlo de ésta manera debido a que el grupo no tenía experiencia previa en el entorno de Unity, así como tampoco en aprendizaje por refuerzo. 
 
-<br/>
+
 
 ### Aprendizaje por refuerzo
 El aprendizaje por refuerzo es una técnica de enseñanza que implica recompensar los comportamientos positivos y castigar los negativos. 
@@ -33,65 +33,65 @@ Consta de un aprendizaje empírico, por lo que el agente informático está en c
 
 - **Recompensas**: La retroalimentación positiva o negativa que el agente recibe por sus acciones.
 
-<br/>
+
 
 ### Básquet
 
 Este es un ejemplo simple creado desde cero en dónde el agente aprende sólo dentro del entorno, es decir, con un set de observaciones y acciones acotado busca meter una pelota de básquet a un aro, es recompensado si lo logra, y también penalizado en ciertas condiciones para lograr el comportamiento deseado más rápidamente.
 
-<br/>
+
 
 Inicio             |  Resultado Final
 :-------------------------:|:-------------------------:
 |<p float=left align="middle"><img src="./ml-agents/docs/images/basquet_inicio.gif" width="380" /></p>  | <p float=left align="middle"><img src="./ml-agents/docs/images/basquet_final.gif" width="380" /></p>|
 
-<br/>
+
 
 ### Walker
 Nuevamente un ejemplo de agente que aprende sólo en el entorno, en este caso es un ejemplo provisto por el toolkit de Unity ML-Agents el cual buscamos mejorar. El enfoque estuvo en lograr un comportamiento más humano en el caminar del agente, esto fue un proceso iterativo con distintas pruebas para finalmente lograr un resultado satisfactorio.
 
-<br/>
+
 
 Inicio             |  Resultado Final
 :-------------------------:|:-------------------------:
 |<p float=left align="middle"><img src="./ml-agents/docs/images/walker_base.gif" width="380" /></p>  | <p float=left align="middle"><img src="./ml-agents/docs/images/walker_final.gif" width="380" /></p>|
 
-<br/>
+
 
 ### Voley
 Este ejemplo también se creo partiendo de cero, con el objetivo de abarcar el entrenamiento de agente vs agente, donde los mismos aprenden jugando entre sí. En el mismo se presentaron diversos problemas a la hora de lograr el comportamiento deseado, los agentes maximizaban sus recompensas explotando situaciones que no se previnieron pero finalmente se logro el resultado esperado con un set de recompensas amplio.
 
-<br/>
+
 
 Inicio             |  Resultado Final
 :-------------------------:|:-------------------------:
 |<p float=left align="middle"><img src="./ml-agents/docs/images/volley_inicio.gif" width="380" /></p>  | <p float=left align="middle"><img src="./ml-agents/docs/images/volley_final.gif" width="380" /></p>|
 
-<br/>
+
 
 ### Fútbol
 Finalmente este ejemplo busca explorar el aprendizaje de agentes vs agentes, es decir por grupos de agentes jugando entre sí en equipo. Nuevamente se trabajó sobre un ejemplo provisto en el toolkit, el mismo constaba de dos equipo de dos agentes. Esto se amplio a seis agentes por equipo y se introdujeron agentes con distintas posiciones en la cancha (por ej: arquero), y por ende distintos comportamientos. El resultado final fue logrado con un set de recompensas complejo en relación a los demás.
 
-<br/>
+
 
 Inicio             |  Resultado Final
 :-------------------------:|:-------------------------:
 |<p float=left align="middle"><img src="./ml-agents/docs/images/basquet_inicio.gif" width="380" /></p>  | <p float=left align="middle"><img src="./ml-agents/docs/images/basquet_final.gif" width="380" /></p>|
 
-<br/>
+
 
 ## Framework utilizado
 ---
-<br/>
+
 
 <img title="a title" alt="Alt text" src="./ml-agents/docs/images/rl_ciclo_desarrollo.png" width="811">
 
-<br/>
+
 
 ### Unity ML-Agents
 Para desarrollar el trabajo utilizamos [**ML-Agents**](https://unity-technologies.github.io/ml-agents/), un framework de aprendizaje por refuerzo desarrollado por [Unity Technologies](https://store.unity.com/download) que permite a los desarrolladores de juegos y otros entornos de simulación entrenar agentes de inteligencia artificial (IA) en entornos virtuales.
 
-<br/>
+
 
 ### TensorBoard
 Para la visualización del entrenamiento a lo largo del tiempo usamos **TensorBoard**, el kit de herramientas desarrollado por TensorFlow. Dentro de la aplicación se pueden analizar las estadísticas de entrenamiento como también el cambio de la política de los modelos a lo largo del tiempo. Para correr TensorBoard, usar:
@@ -102,12 +102,12 @@ $ tensorboard --logdir results
 
 Donde **results** es la carpeta generada por ML-Agents con los respectivos modelos de redes neuronales.
 
-<br/>
+
 
 ### PyTorch
 **PyTorch** es una biblioteca open source para realizar cómputos usando data flow graphs, la forma fundamental de representar modelos de aprendizaje profundo. Muchos de los modelos del toolkit de **Unity ML-Agents** están implementados sobre esta biblioteca.
 
-<br/>
+
 
 ## Dependencias
 
@@ -116,7 +116,7 @@ Donde **results** es la carpeta generada por ML-Agents con los respectivos model
 - Paquete de Unity com.unity.ml-agents
 - Paquete de Unity com.unity.ml-agents.extensions
 
-<br/>
+
 
 ```
 $ python -m pip install mlagents==0.30.0
@@ -129,20 +129,20 @@ $ pip3 install torch~=1.7.1 -f https://download.pytorch.org/whl/torch_stable.htm
 $ pip3 install tensorboard
 ```
 
-<br/>
+
 
 ## Entrenamiento
 ---
-<br/>
+
 
 Con la excepción del ejemplo de Fútbol, el cuál utiliza **MA-POCA** debido a que es aprendizaje en grupos, los demás hacen uso del algoritmo desarrollado por OpenAI, **PPO** (Optimización de Políticas Próximas), el mismo es una técnica que utiliza una red neuronal para aproximar la función ideal que asigna las observaciones de un agente a la mejor acción que un agente puede realizar en un estado determinado. 
 Este es un proceso iterativo en el cual entrenamos, visualizamos las métricas del entrenamiento y ajustamos híperparametros acordemente.
 
-<br/>
+
 
 ### Algunas métricas de interés:
 
-<br/>
+
 
 | Variable | Descripción |
 | ----------- | ----------- |
@@ -157,7 +157,7 @@ Este es un proceso iterativo en el cual entrenamos, visualizamos las métricas d
 | **hidden_units** | Cuántas unidades hay en cada capa completamente conectada de la red neuronal.|
 | **max_steps** | Cuantos pasos de la simulación durará el entrenamiento. Para problemas más complejos se debería subir el número"
 
-<br/>
+
 
 ### Un ejemplo de archivo:
 
@@ -197,11 +197,11 @@ Se puede usar los siguientes flags:
 - --force : Sobreescribir un id.
 - --initialize-from= : Comenzar una sesión de entrenamiento para un nuevo id a partir de un modelo preentrenado.
 
-<br/>
+
 
 ## Más información
 ---
-<br/>
+
 
 - [Reinforcement Learning](https://huggingface.co/tasks/reinforcement-learning)
 
@@ -219,11 +219,11 @@ Se puede usar los siguientes flags:
 
 - [Using TensorBoard to Observe Training](https://github.com/Unity-Technologies/ml-agents/blob/develop/docs/Using-Tensorboard.md#using-tensorboard-to-observe-training)
 
-<br/>
+
 
 ## Autores
 ---
-<br/>
+
 
 - [Manuel Diéguez](https://github.com/jmdieguez)
 
@@ -233,11 +233,11 @@ Se puede usar los siguientes flags:
 
 - [Ignacio Montecalvo](https://github.com/imontecalvo)
 
-<br/>
+
 
 ## Reconocimientos
 ---
-<br/>
+
 
 - Se utilizaron como base algunos de los ejemplos provistos en [Unity ML-Agents Toolkit](https://github.com/Unity-Technologies/ml-agents).
 
