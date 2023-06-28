@@ -12,11 +12,6 @@ public class BasketballSettings : MonoBehaviour
 
     StatsRecorder m_Recorder;
 
-    public void Initialize()
-    {
-        scoreText = FindObjectOfType<Text>();
-    }
-
     public void Awake()
     {
         m_Recorder = Academy.Instance.StatsRecorder;

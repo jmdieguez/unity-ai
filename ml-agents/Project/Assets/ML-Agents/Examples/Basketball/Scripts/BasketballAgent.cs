@@ -5,19 +5,22 @@ using Unity.MLAgents.Actuators;
 
 public class BasketballAgent : Agent
 {
-    [Tooltip("Max Environment Steps")] public int MaxEnvironmentSteps = 25000;
+    [Tooltip("Max Environment Steps")] public int MaxEnvironmentSteps = 15000;
     [Tooltip("Shooting force multiplier")] public float forceMultiplier = 2000;
     [Tooltip("Velocity of agent movement")] public float aimMultiplier = 120;
 
     Rigidbody rBody; // Declaring reference to agent Rigidbody for physics
-    Rigidbody ballRBody; // Declaring reference to ball Rigidbody for physics
+    Rigidbody ballRBody; // Declaring reference to basketball Rigidbody for physics
     BasketballSettings m_BasketballSettings;
 
-    public GameObject ball;
+    public GameObject basketball;
     public Transform scoreArea; // The target, in this case the Basketball Hoop
-
+    [HideInInspector]
+    public bool hoopTouched = false;
     private bool holdingBall = true;
     private int m_ResetTimer;
+    private float distance;
+    private Vector3 hoopPos = Vector3.zero;
     private Quaternion originalAgentRotationValue;
     private Quaternion originalBallRotationValue;
 
@@ -25,53 +28,50 @@ public class BasketballAgent : Agent
     {
         m_BasketballSettings = FindObjectOfType<BasketballSettings>();
         rBody = GetComponent<Rigidbody>();
-        ballRBody = ball.GetComponent<Rigidbody>();
-    }
-
-    void Start()
-    {
-        originalBallRotationValue = ball.transform.rotation;
+        ballRBody = basketball.GetComponent<Rigidbody>();
+        originalBallRotationValue = basketball.transform.rotation;
         originalAgentRotationValue = this.transform.rotation;
+        hoopPos.Set(scoreArea.localPosition.x, 0.5f, scoreArea.localPosition.z);
         GrabBall();
     }
 
     public override void CollectObservations(VectorSensor sensor)
     {
-        // Target and Agent positions, the force and angle of the shot, 11 observations in total
-        sensor.AddObservation(this.transform.localPosition);
-        sensor.AddObservation(scoreArea.localPosition);
+        // Distance to target, the force and angle of the shot, and wether or not we have the ball 4 observations in total
+        sensor.AddObservation(distance);
         sensor.AddObservation(Mathf.Clamp(shootingForce, 0.45f, 1f));
         sensor.AddObservation(angle);
+        sensor.AddObservation(holdingBall);
     }
 
     void FixedUpdate()
     {
         m_ResetTimer += 1;
-        if (m_ResetTimer >= MaxEnvironmentSteps && MaxEnvironmentSteps > 0 && !(HasBall()))
+        if (m_ResetTimer >= MaxEnvironmentSteps && MaxEnvironmentSteps > 0)
         {
             Debug.Log("Episode Timed Out");
             EndEpisode();
+        }
+
+        // Fell off platform
+        if (basketball.transform.localPosition.y < -0.5f)
+        {
+            Debug.Log("Ball fell off the platform");
+            AddReward(-0.25f);
+            EndEpisode();
+        }
+
+        // We request decision only when we have the ball
+        if (HasBall() && ((m_ResetTimer % 5) == 0)) {
+            RequestDecision();
         }
     }
 
     public override void OnEpisodeBegin()
     {
-        // Add to episode count and reset timer and shooting force
-        m_BasketballSettings.totalEpisodes += 1;
         m_ResetTimer = 0;
-        shootingForce = 0f;
-
-        // Reset agent and ball physics
-        this.GrabBall();
-        this.ResetAgentPhysics();
-        ballRBody.angularVelocity = Vector3.zero;
-        ballRBody.velocity = Vector3.zero;
-        ball.transform.rotation = originalBallRotationValue;
-
-        // Move both to a new random location
-        this.ChangeAgentPosition();
-        ball.transform.localPosition = this.transform.localPosition + this.transform.forward + this.transform.up;
-        ball.transform.rotation = this.transform.rotation;
+        ResetScene();
+        Debug.Log("Distance to target: " + distance);
     }
 
     private void ResetAgentPhysics()
@@ -95,21 +95,45 @@ public class BasketballAgent : Agent
     }
     private void ShootBall(float force)
     {
+        m_BasketballSettings.totalEpisodes += 1;
         holdingBall = false;
-        ball.GetComponent<Rigidbody>().useGravity = true; // We need the ball to be afected by gravity once we shoot
-        ball.GetComponent<Rigidbody>().AddForce(ball.transform.forward * force);
-        ball.GetComponentInChildren<TrailRenderer>().emitting = true;
+        basketball.GetComponent<Rigidbody>().useGravity = true; // We need the basketball to be afected by gravity once we shoot
+        basketball.GetComponent<Rigidbody>().AddForce(basketball.transform.forward * force);
+        basketball.GetComponentInChildren<TrailRenderer>().emitting = true;
     }
 
     public void GrabBall()
     {
-        // We reset the ball momentum
+        // We reset the basketball momentum
         ballRBody.angularVelocity = Vector3.zero;
         ballRBody.velocity = Vector3.zero;
         holdingBall = true;
-        ball.GetComponent<Rigidbody>().useGravity = false; // When grabbing the ball we don't want it to be afected by gravity
-        ball.GetComponentInChildren<TrailRenderer>().emitting = false;
+        basketball.GetComponent<Rigidbody>().useGravity = false; // When grabbing the basketball we don't want it to be afected by gravity
+        basketball.GetComponentInChildren<TrailRenderer>().emitting = false;
     }
+
+    public void ResetScene()
+    {
+        basketball.GetComponentInChildren<TrailRenderer>().Clear();
+        // Add to episode count and reset timer and shooting force
+        shootingForce = 0.45f;
+        this.hoopTouched = false;
+
+        // Reset agent and basketball physics
+        this.GrabBall();
+        this.ResetAgentPhysics();
+        ballRBody.angularVelocity = Vector3.zero;
+        ballRBody.velocity = Vector3.zero;
+        basketball.transform.rotation = originalBallRotationValue;
+
+        // Move both to a new random location
+        this.ChangeAgentPosition();
+        basketball.transform.localPosition = this.transform.localPosition + this.transform.forward + this.transform.up;
+        basketball.transform.rotation = this.transform.rotation;
+
+        distance = Vector3.Distance(this.transform.localPosition, hoopPos);
+    }
+
 
     private float shootingForce = 0.45f;
     private float shootingForceMax = 1.0f;
@@ -128,13 +152,13 @@ public class BasketballAgent : Agent
             switch (rotateBallAxis)
             {
                 case 1:
-                    rotateBallDir = transform.right * -1f;
-                    angle = Vector3.Angle(ball.transform.forward, this.transform.forward);
+                    rotateBallDir = transform.right * -0.5f;
+                    angle = Vector3.Angle(basketball.transform.forward, this.transform.forward);
                     Debug.Log("Angle:" + angle);
                     break;
                 case 2:
-                    rotateBallDir = transform.right * 1f;
-                    angle = Vector3.Angle(ball.transform.forward, this.transform.forward);
+                    rotateBallDir = transform.right * 0.5f;
+                    angle = Vector3.Angle(basketball.transform.forward, this.transform.forward);
                     Debug.Log("Angle:" + angle);
                     break;
             }
@@ -145,14 +169,14 @@ public class BasketballAgent : Agent
                     if (shootingForce < 0.45f) {
                         shootingForce = 0.45f;
                     }
-                    shootingForce = shootingForce + 0.01f;
+                    shootingForce = shootingForce + 0.005f;
                     if (shootingForce > shootingForceMax) {
                         shootingForce = shootingForceMax;
                     }
                     Debug.Log("Shooting Force: " + shootingForce);
                     break;
                 case 2:
-                    shootingForce = shootingForce - 0.01f;
+                    shootingForce = shootingForce - 0.005f;
                     if (shootingForce < 0.45f) {
                         shootingForce = 0.45f;
                     }
@@ -165,7 +189,6 @@ public class BasketballAgent : Agent
                     if (HasBall()) {
                         // Shoot
                         ShootBall(shootingForce * forceMultiplier);
-                        shootingForce = 0.45f;
                     }
                     break;
                 case 2:
@@ -174,14 +197,8 @@ public class BasketballAgent : Agent
             }
         }
 
-        // Fell off platform or touch ground
-        if (ball.transform.localPosition.y < 0.1)
-        {
-            EndEpisode();
-        }
-
         // Perform requested aiming
-        ball.transform.RotateAround(this.transform.localPosition, rotateBallDir, Time.fixedDeltaTime * 100f);
+        basketball.transform.RotateAround(this.transform.localPosition, rotateBallDir, Time.deltaTime * 100f);
     }
 
     public void Scored()
