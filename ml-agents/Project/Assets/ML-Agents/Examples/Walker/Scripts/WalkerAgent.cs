@@ -275,7 +275,7 @@ public class WalkerAgent : Agent
     void RewardStep()
     {
         // Update foot timer
-        footTimer += Time.deltaTime;
+        footTimer += Time.fixedDeltaTime;
 
         if (footTimer > 2f)
         {

@@ -181,7 +181,7 @@ public class BasketballAgent : Agent
         }
 
         // Perform requested aiming
-        ball.transform.RotateAround(this.transform.localPosition, rotateBallDir, Time.deltaTime * 100f);
+        ball.transform.RotateAround(this.transform.localPosition, rotateBallDir, Time.fixedDeltaTime * 100f);
     }
 
     public void Scored()
