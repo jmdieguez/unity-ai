@@ -313,7 +313,7 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: 8792899692101f249b7c041004dcf264, type: 3}
+  m_Model: {fileID: 0}
   m_InferenceDevice: 2
   m_BehaviorType: 0
   m_BehaviorName: WalkerDynamic
@@ -371,7 +371,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxJointSpring: 40000
   jointDampen: 5000
-  maxJointForceLimit: 20000
+  maxJointForceLimit: 10000
   bodyPartsList: []
 --- !u!114 &895268871377934302
 MonoBehaviour:

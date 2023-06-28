@@ -303,8 +303,8 @@ public class WalkerAgent : Agent
 
         stepLength = relativePosition.magnitude;
         float dotProduct = Vector3.Dot(relativePosition, agentForward);
-
-        bool goodStepLength = (stepLength > 0.5) && (stepLength < 1.25f);
+        Debug.Log(stepLength);
+        bool goodStepLength = (stepLength > 0.5) && (stepLength < 1f);
 
         if (!changingDirection)
         {

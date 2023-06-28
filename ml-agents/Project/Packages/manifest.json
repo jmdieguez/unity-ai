@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.unity.connect.share": "4.2.3",
     "com.unity.ide.rider": "3.0.18",
     "com.unity.inputsystem": "1.5.1",
     "com.unity.ml-agents": "file:../../com.unity.ml-agents",

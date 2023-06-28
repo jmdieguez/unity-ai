@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/ML-Agents/Examples/Soccer/Scenes/Soccer 6v6.unity
     guid: c2cd7cf4a64ecd34887a412945d06b29
+  - enabled: 0
+    path: Assets/ML-Agents/Examples/Walker/Scenes/Walker 1.unity
+    guid: a3cec8dc0254e4745bca89a3717598d4
   m_configObjects: {}

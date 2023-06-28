@@ -448,12 +448,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 8792899692101f249b7c041004dcf264,
-        type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 7819659174506835736, guid: 84359146bf7af47e58c229d877e801d7,
         type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
       value: 247
+      objectReference: {fileID: 0}
+    - target: {fileID: 7819659174506835742, guid: 84359146bf7af47e58c229d877e801d7,
+        type: 3}
+      propertyPath: maxJointForceLimit
+      value: 10000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 84359146bf7af47e58c229d877e801d7, type: 3}
@@ -648,12 +652,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 8792899692101f249b7c041004dcf264,
-        type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 7819659174506835736, guid: 84359146bf7af47e58c229d877e801d7,
         type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
       value: 247
+      objectReference: {fileID: 0}
+    - target: {fileID: 7819659174506835742, guid: 84359146bf7af47e58c229d877e801d7,
+        type: 3}
+      propertyPath: maxJointForceLimit
+      value: 10000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 84359146bf7af47e58c229d877e801d7, type: 3}
@@ -848,12 +856,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 8792899692101f249b7c041004dcf264,
-        type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 7819659174506835736, guid: 84359146bf7af47e58c229d877e801d7,
         type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
       value: 247
+      objectReference: {fileID: 0}
+    - target: {fileID: 7819659174506835742, guid: 84359146bf7af47e58c229d877e801d7,
+        type: 3}
+      propertyPath: maxJointForceLimit
+      value: 10000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 84359146bf7af47e58c229d877e801d7, type: 3}
@@ -1048,12 +1060,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 8792899692101f249b7c041004dcf264,
-        type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 7819659174506835736, guid: 84359146bf7af47e58c229d877e801d7,
         type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
       value: 247
+      objectReference: {fileID: 0}
+    - target: {fileID: 7819659174506835742, guid: 84359146bf7af47e58c229d877e801d7,
+        type: 3}
+      propertyPath: maxJointForceLimit
+      value: 10000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 84359146bf7af47e58c229d877e801d7, type: 3}
@@ -1192,7 +1208,7 @@ PrefabInstance:
     - target: {fileID: 6718791046026642300, guid: 84359146bf7af47e58c229d877e801d7,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6718791046026642300, guid: 84359146bf7af47e58c229d877e801d7,
         type: 3}
@@ -1248,12 +1264,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 8792899692101f249b7c041004dcf264,
-        type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 7819659174506835736, guid: 84359146bf7af47e58c229d877e801d7,
         type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
       value: 247
+      objectReference: {fileID: 0}
+    - target: {fileID: 7819659174506835742, guid: 84359146bf7af47e58c229d877e801d7,
+        type: 3}
+      propertyPath: maxJointForceLimit
+      value: 10000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 84359146bf7af47e58c229d877e801d7, type: 3}
@@ -1448,12 +1468,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 8792899692101f249b7c041004dcf264,
-        type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 7819659174506835736, guid: 84359146bf7af47e58c229d877e801d7,
         type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
       value: 247
+      objectReference: {fileID: 0}
+    - target: {fileID: 7819659174506835742, guid: 84359146bf7af47e58c229d877e801d7,
+        type: 3}
+      propertyPath: maxJointForceLimit
+      value: 10000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 84359146bf7af47e58c229d877e801d7, type: 3}
@@ -1642,12 +1666,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 8792899692101f249b7c041004dcf264,
-        type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 7819659174506835736, guid: 84359146bf7af47e58c229d877e801d7,
         type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
       value: 247
+      objectReference: {fileID: 0}
+    - target: {fileID: 7819659174506835742, guid: 84359146bf7af47e58c229d877e801d7,
+        type: 3}
+      propertyPath: maxJointForceLimit
+      value: 10000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 84359146bf7af47e58c229d877e801d7, type: 3}
@@ -1826,12 +1854,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 8792899692101f249b7c041004dcf264,
-        type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 7819659174506835736, guid: 84359146bf7af47e58c229d877e801d7,
         type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
       value: 247
+      objectReference: {fileID: 0}
+    - target: {fileID: 7819659174506835742, guid: 84359146bf7af47e58c229d877e801d7,
+        type: 3}
+      propertyPath: maxJointForceLimit
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 7819659174955737644, guid: 84359146bf7af47e58c229d877e801d7,
         type: 3}
@@ -2185,12 +2217,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 8792899692101f249b7c041004dcf264,
-        type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 7819659174506835736, guid: 84359146bf7af47e58c229d877e801d7,
         type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
       value: 247
+      objectReference: {fileID: 0}
+    - target: {fileID: 7819659174506835742, guid: 84359146bf7af47e58c229d877e801d7,
+        type: 3}
+      propertyPath: maxJointForceLimit
+      value: 10000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 84359146bf7af47e58c229d877e801d7, type: 3}
@@ -2266,7 +2302,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4943719350691982, guid: 5889392e3f05b448a8a06c5def6c2dec, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4943719350691982, guid: 5889392e3f05b448a8a06c5def6c2dec, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2489,12 +2525,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 8792899692101f249b7c041004dcf264,
-        type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 7819659174506835736, guid: 84359146bf7af47e58c229d877e801d7,
         type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
       value: 247
+      objectReference: {fileID: 0}
+    - target: {fileID: 7819659174506835742, guid: 84359146bf7af47e58c229d877e801d7,
+        type: 3}
+      propertyPath: maxJointForceLimit
+      value: 10000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 84359146bf7af47e58c229d877e801d7, type: 3}
