@@ -20,7 +20,7 @@ Proyecto de entrenamiento de modelos de IA con aprendizaje por refuerzo (reinfor
 ## Introducción
 El aprendizaje por refuerzo es una técnica de enseñanza que implica recompensar los comportamientos positivos y castigar los negativos. 
 Consta de un aprendizaje empírico, por lo que el agente informático está en constante búsqueda de aquellas decisiones que le premien y a la par evita aquellos caminos que, por experiencia propia, son penalizados.
-
+  
 <div align="center">
 <img title="a title" alt="Alt text" src="/ml-agents/docs/images/ciclo.JPG">
 </div>
@@ -39,7 +39,6 @@ Consta de un aprendizaje empírico, por lo que el agente informático está en c
 
 <div align="center">
 <img title="a title" alt="Alt text" src="/ml-agents/docs/images/voley.JPG">
-
 <img title="a title" alt="Alt text" src="/ml-agents/docs/images/observaciones.JPG">
 </div>
 
@@ -47,7 +46,6 @@ Consta de un aprendizaje empírico, por lo que el agente informático está en c
 
 <div align="center">
 <img title="a title" alt="Alt text" src="/ml-agents/docs/images/basquet2.JPG">
-
 </div>
 
 - Recompensas: La retroalimentación positiva o negativa que el agente recibe por sus acciones.
@@ -55,8 +53,20 @@ Consta de un aprendizaje empírico, por lo que el agente informático está en c
 <div align="center">
 <img title="a title" alt="Alt text" src="/ml-agents/docs/images/voley3.JPG">
 </div>
+  
+---
 
-Para desarrollar el trabajo utilizamos **ML-Agents**, un framework de aprendizaje por refuerzo desarrollado por Unity Technologies que permite a los desarrolladores de juegos y otros entornos de simulación entrenar agentes de inteligencia artificial (IA) en entornos virtuales.
+<p>
+<br>
+<div align="left">
+
+## Frameworks utilizados
+Para desarrollar el trabajo utilizamos [**ML-Agents**](https://unity-technologies.github.io/ml-agents/), un framework de aprendizaje por refuerzo desarrollado por [Unity Technologies](https://store.unity.com/download) que permite a los desarrolladores de juegos y otros entornos de simulación entrenar agentes de inteligencia artificial (IA) en entornos virtuales.
+
+<div align="center">
+<img title="a title" alt="Alt text" src="/ml-agents/docs/images/image-banner.png">
+</div>
+
 
 Para la visualización del entrenamiento a lo largo del tiempo usamos **TensorBoard**, el kit de herramientas desarrollado por TensorFlow. Dentro de la aplicación se pueden analizar las estadísticas de entrenamiento como también el cambio de la política de los modelos a lo largo del tiempo. Para correr TensorBoard, usar:
 
@@ -85,12 +95,6 @@ PyTorch es una biblioteca open source para realizar cómputos usando data flow g
 </p>
 </br>
   
----
-
-<p>
-<br>
-<div align="left">
-
 ## Entrenamiento
 
 ML-Agents usa una técnica de entrenamiento por refuerzo llamada **PPO** (Optimización de políticas próximas) es una técnica que utiliza una red neuronal para aproximar la función ideal que asigna las observaciones de un agente a la mejor acción que un agente puede realizar en un estado determinado.
@@ -104,8 +108,6 @@ ML-Agents usa una técnica de entrenamiento por refuerzo llamada **PPO** (Optimi
 | **buffer_size** | Cuántas experiencias (observaciones de agentes, acciones y recompensas obtenidas) se deben recopilar antes de realizar cualquier aprendizaje o actualización del modelo. |
 
 ## Bibliografía
-
-[Unity](https://store.unity.com/download)
 
 [Reinforcement Learning](https://huggingface.co/tasks/reinforcement-learning)
 
