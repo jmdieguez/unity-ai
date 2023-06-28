@@ -5,16 +5,18 @@ using UnityEngine.SceneManagement;
 
 public class SeleccionModelo : MonoBehaviour
 {
-    private int currentSceneIndex = -1;
-
-    public void cambiarNivel(int numeroNivel)
-    {
-        if (currentSceneIndex != -1)
-        {
-            SceneManager.UnloadSceneAsync(currentSceneIndex);
-        }
-
+    public void cambiarNivel(int numeroNivel){
         SceneManager.LoadScene(numeroNivel);
-        currentSceneIndex = numeroNivel;
+    }
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
     }
 }

@@ -12,11 +12,6 @@ public class BasketballSettings : MonoBehaviour
 
     StatsRecorder m_Recorder;
 
-    public void Initialize()
-    {
-        scoreText = FindObjectOfType<Text>();
-    }
-
     public void Awake()
     {
         m_Recorder = Academy.Instance.StatsRecorder;
@@ -24,7 +19,7 @@ public class BasketballSettings : MonoBehaviour
 
     public void Update()
     {
-        scoreText.text = $"Score: {totalScore}";
+        //scoreText.text = $"Score: {totalScore}";
 
         // Send stats via SideChannel so that they'll appear in TensorBoard.
         // These values get averaged every summary_frequency steps, so we don't
