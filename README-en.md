@@ -1,3 +1,6 @@
+[![en](https://img.shields.io/badge/lang-en-red.svg)](https://github.com/jmdieguez/unity-ai/blob/master/README-en.md)
+[![es](https://img.shields.io/badge/lang-es-yellow.svg)](https://github.com/jmdieguez/unity-ai/blob/master/README.md)
+
 # Artificial Intelligence FIUBA
 
 Training AI models with reinforcement learning 3D project in Unity. It corresponds to the group practical work of the course **ARTIFICIAL INTELLIGENCE (95.25)** at the Faculty of Engineering of the University of Buenos Aires (**FIUBA**).
