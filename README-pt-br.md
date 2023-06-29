@@ -1,3 +1,7 @@
+[![en](https://img.shields.io/badge/lang-en-red.svg)](https://github.com/jmdieguez/unity-ai/blob/master/README-en.md)
+[![es](https://img.shields.io/badge/lang-es-yellow.svg)](https://github.com/jmdieguez/unity-ai/blob/master/README.md)
+[![pt-br](https://img.shields.io/badge/lang-pt--br-green.svg)](https://github.com/jmdieguez/unity-ai/blob/master/README-pt-br.md)
+
 # Trabalho Prático em Grupo - Inteligência Artificial FIUBA
 
 Projeto de treinamento de modelo de IA com Reinforcement Learning (**Reinforcement Learning**) no Unity. Corresponde ao trabalho prático em grupo da disciplina **INTELIGÊNCIA ARTIFICIAL (95.25)** da Faculdade de Engenharia da Universidade de Buenos Aires (**FIUBA**).
