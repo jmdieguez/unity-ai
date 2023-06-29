@@ -1,5 +1,6 @@
 [![en](https://img.shields.io/badge/lang-en-red.svg)](https://github.com/jmdieguez/unity-ai/blob/master/README-en.md)
 [![es](https://img.shields.io/badge/lang-es-yellow.svg)](https://github.com/jmdieguez/unity-ai/blob/master/README.md)
+[![pt-br](https://img.shields.io/badge/lang-pt--br-green.svg)](https://github.com/jmdieguez/unity-ai/blob/master/README-pt-br.md)
 
 # Trabajo Práctico Grupal - Inteligencia Artificial FIUBA
 
